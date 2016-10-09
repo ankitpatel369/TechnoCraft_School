@@ -1,0 +1,66 @@
+﻿@model TechnoCraftSchool_Model.Division
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<section class="content">
+    @section Header{
+        <section class="content-header">
+            <h1>Division Management</h1>
+        </section>
+    }
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Division</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+
+                @using (Html.BeginForm("Create", "Division"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="box-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Classs.ClassName)
+                            @Html.DropDownList("Class_ID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Classs.ClassName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DivisionName)
+                            @Html.EditorFor(model => model.DivisionName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DivisionName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DivisionAlias)
+                            @Html.EditorFor(model => model.DivisionAlias, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DivisionAlias, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsActive)
+                            &nbsp;&nbsp; @Html.EditorFor(model => model.IsActive)
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index","Division")'"> View </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

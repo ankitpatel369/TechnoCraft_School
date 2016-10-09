@@ -1,0 +1,65 @@
+.pointer-move{
+    cursor:move;
+}
+.bdb {
+    border: 1px solid black;
+}
+
+.bdr {
+    border: 1px solid red;
+}
+
+.grb {
+    background-color: green;
+}
+
+.crb {
+    background-color: #fbeed5;
+}
+
+.wd20 {
+    width: 20px;
+}
+
+.wd50 {
+    width: 50px;
+}
+
+.he20 {
+    height: 20px;
+}
+
+.he50 {
+    height: 50px;
+}
+
+.dlt {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+.cusion-red{
+    border-color:red !important;
+}
+
+.cusion {
+    padding: -1px;
+    background: transparent;
+    height: 5px;
+    width: 16px;
+    margin: 0 auto;
+    bottom: -11px;
+    position: relative;
+    border: solid 1px;
+}
+#Lowerdeck, #Upperdeck{
+    width:100% !important;
+}
+#Lowerdeck td, #Upperdeck td {
+    width: 50px;
+    height: 50px;
+    padding: 3px;
+    border: 1px solid #aaaaaa;
+}

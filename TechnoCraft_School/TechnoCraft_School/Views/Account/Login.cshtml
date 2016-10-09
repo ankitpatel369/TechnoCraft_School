@@ -1,0 +1,69 @@
+﻿@using TechnoCraft_School.Models
+@model LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
+    ViewBag.Title = "Log In";
+}
+<style type="text/css">
+    .validation-summary-errors li {
+        list-style: none;
+        margin: 0;
+        padding: 5px -10px 5px 0px;
+    }
+
+    .alert-danger, .alert-error {
+        border-color: #d73925;
+        background-color: #dd4b39 !important;
+        color: white;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+</style>
+
+<link href="~/Content/Loginstyle.css" rel="stylesheet" />
+<div class="wrapper">
+
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+    {
+        @class = "form-signin",
+        @Role = "form",
+        id = "loginform",
+
+        name = "loginform"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <center>
+            @*<img src="~/Content/AdminLTE/img/logo.png" style="margin-top:5px;" />*@
+           @*<img src="~/Content/AdminLTE/img/logo_for_Addressbar.png"  style=" height:100px; width:100px;"/>*@
+            <img src="~/Content/AdminLTE/img/logo_for_Addressbar1.png" style="margin-top:5px; height:100px; width:200px;"/>
+            <br />
+            @*<h3>Web School</h3>*@
+        </center>
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger", @style = "list-style-type: none; -webkit-padding-start: 0px;" })
+        <hr />
+
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", required = "required", @type = "email", @autofocus = "" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger bg-red" })
+        <br />
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @type = "password", @required = "required", })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger bg-red" })
+        <br />
+        @Html.CheckBoxFor(m => m.RememberMe) @:&nbsp;
+        @Html.LabelFor(m => m.RememberMe, new { @class = "Checkbox" })
+
+        <br />
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Log In</button>
+
+        <hr />
+        @Html.ActionLink("Forgot Your Password?", "ForgotPassword")
+    }
+
+</div>

@@ -1,0 +1,225 @@
+﻿@model IEnumerable<TechnoCraftSchool_Model.Students.Students>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GR_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentPhoto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Standard_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Devision_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_of_Birth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CasteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CasteCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MotherTongue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Religion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PermanentAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PermanentCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PermanentTaluka)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PermanentDistrict)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PermanentPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalTaluka)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalDistrict)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FatherPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BloodGroup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Of_Admission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year_Of_Admission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Status_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GR_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentPhoto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Standard_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Class_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Devision_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_of_Birth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CasteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CasteCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nationality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MotherTongue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Religion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermanentAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermanentCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermanentTaluka)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermanentDistrict)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PermanentPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalTaluka)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalDistrict)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FatherPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BloodGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Of_Admission)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year_Of_Admission)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_Status_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Students_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Students_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Students_ID })
+        </td>
+    </tr>
+}
+
+</table>

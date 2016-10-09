@@ -1,0 +1,143 @@
+﻿@model TechnoCraftSchool_Model.Institute
+
+@{
+    ViewBag.Title = "Web School";
+}
+
+<div class="row">
+
+    <!-- left column -->
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Institution Details</h3>
+            </div>
+        </div>
+        <!-- general form elements -->
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="panel-body">
+                    <div class="tabbable">
+                        <div class="tab-content">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div id="top-divided-tab1" class="tab-pane active">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "callout callout-danger" })
+                                    <br />
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="panel panel-default">
+
+                                                <div class="panel-body">
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.InstitutionName, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.InstitutionName, new { htmlAttributes = new { @class = "form-control", placeholder = "Institution Name" } })
+                                                        @Html.ValidationMessageFor(model => model.InstitutionName, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form_group">
+                                                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Institution Address", @style = "margin-bottom: 5px;" } })
+                                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Institution Email" } })
+                                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Institution Phone" } })
+                                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "Institution Mobile" } })
+                                                        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="panel panel-default">
+
+                                                <div class="panel-body">
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AdminContact, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.AdminContact, new { htmlAttributes = new { @class = "form-control", placeholder = "Admin Contact" } })
+                                                        @Html.ValidationMessageFor(model => model.AdminContact, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "Country" } })
+                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", placeholder = "Currency" } })
+                                                        @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control", placeholder = "Language" } })
+                                                        @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.InstitutionCode, htmlAttributes: new { @class = "control-label" })
+                                                        @Html.EditorFor(model => model.InstitutionCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Institution Code", @style = "margin-bottom: 5px;" } })
+                                                        @Html.ValidationMessageFor(model => model.InstitutionCode, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    @*<div class="form-group">
+                                                            @Html.LabelFor(model => model.Time_Zone, htmlAttributes: new { @class = "control-label" })
+                                                            @Html.EditorFor(model => model.Time_Zone, new { htmlAttributes = new { @class = "form-control", placeholder = "Time Zone", @style = "margin-bottom: 5px;" } })
+                                                            @Html.ValidationMessageFor(model => model.Time_Zone, "", new { @class = "text-danger" })
+                                                        </div>*@
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="form_sep">
+                                                <input class="col-md-3 btn btn-info" type="submit" value="Save">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                    <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+                </div>
+                <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+            </div>
+        </div><!-- /.box -->
+    </div>
+    <!--/.col (left) -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

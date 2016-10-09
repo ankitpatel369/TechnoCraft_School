@@ -1,0 +1,282 @@
+﻿@model TechnoCraftSchool_Model.Students.Students
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Students</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GR_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GR_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Standard_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Standard_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Class_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Class_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Devision_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Devision_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_of_Birth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_of_Birth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CasteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CasteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CasteCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CasteCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotherTongue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotherTongue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Religion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentTaluka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentTaluka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentDistrict)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentDistrict)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalTaluka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalTaluka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalDistrict)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalDistrict)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BloodGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BloodGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Of_Admission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Of_Admission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year_Of_Admission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year_Of_Admission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student_Status_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_Status_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Students_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

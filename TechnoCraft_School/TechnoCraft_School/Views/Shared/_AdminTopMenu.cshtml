@@ -1,0 +1,66 @@
+﻿@*
+    This partial controls the top menu of the AdminLTE Template, being called automatically by _AdminLteLayout
+       TODO: All of the content in here is stand-in that must be replaced by the real behavior of your app
+*@
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Layout = null;
+}
+@*@if (Request.IsAuthenticated)
+    {*@
+<header class="main-header">
+    <!-- Logo -->
+    <a href="@Url.Action("Index", "Home")" class="logo">
+        <img src="~/Content/AdminLTE/img/logo_for_Addressbar.png" height="30" width="30" />
+        <b>Web</b> School
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" onclick="menustyle()">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+
+                @*@{Html.RenderAction("Notification", "Home");}*@
+
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/Content/AdminLTE/img/user.png" class="user-image" alt="User Image" />
+                        @User.Identity.Name
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="~/Content/AdminLTE/img/user.png" class="img-circle" alt="User Image" />
+                            <p>
+                                @User.Identity.Name
+                                @*<small>Member since Nov. 2012</small>*@
+                            </p>
+                        </li>
+
+                        <li class="user-footer" style="background-color:#ffffff;">
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "user-body" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="pull-left">
+                                    @Html.ActionLink("Manage Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "btn btn-default btn-flat", @title = "Manage" })
+                                </div>
+                                <div class="pull-right">
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default btn-flat">
+                                        Sign out
+                                    </a>
+                                </div>
+                            }
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+@*}*@
+

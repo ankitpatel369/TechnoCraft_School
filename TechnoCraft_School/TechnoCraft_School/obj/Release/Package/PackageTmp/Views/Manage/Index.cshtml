@@ -1,0 +1,38 @@
+﻿@model MatrukrupatravelsAdmin.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+<style type="text/css">
+    .profile-user-img {
+        margin: 0 auto;
+        width: 100px;
+        padding: 3px;
+        border: 3px solid #d2d6de;
+    }
+</style>
+@*<p class="text-success">@ViewBag.StatusMessage</p>*@
+<div class="row">
+    <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle" src="~/Content/AdminLTE/img/user.png" alt="User profile picture">
+                <h3 class="profile-username text-center">@User.Identity.Name</h3>
+            <hr />
+                <p class="text-muted text-center">@*Software Engineer*@</p>
+                <p class="text-success text-center  bg-green">@ViewBag.StatusMessage</p>
+                <ul class="list-group list-group-unbordered"></ul>
+                @if (Model.HasPassword)
+                {
+                    <a href="@Url.Action("ChangePassword")" class="btn btn-primary btn-block"><b>Change your password</b></a>
+                }
+                else
+                {
+                    <a href="@Url.Action("SetPassword")" class="btn btn-primary btn-block"><b>Create</b></a>
+                }
+
+
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>

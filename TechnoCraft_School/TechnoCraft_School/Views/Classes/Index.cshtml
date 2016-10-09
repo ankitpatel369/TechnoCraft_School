@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TechnoCraftSchool_Model.Class>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<section class="content">
+
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa  fa-tasks"></i> &nbsp;&nbsp; Class </h3>
+                    <div class="box-tools pull-right">
+                        <a href="@Url.Action("Create","Classes")" class="btn btn-primary"><i class="fa fa-plus"></i> Create new class </a>
+                        <div></div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div style="display: block;" class="box-body">
+                    <div>
+                        <table class="table table-bordered table-striped dataTable" id="Buses">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Standards.StandardName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ClassName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ClassAlias)
+                                    </th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr style="background:@(item.IsActive ? "#FFF" : "#EEE")">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Standards.StandardName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassAlias)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Class_ID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.Class_ID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Class_ID })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

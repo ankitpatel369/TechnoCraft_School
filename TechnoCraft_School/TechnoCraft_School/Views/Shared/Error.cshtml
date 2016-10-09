@@ -1,0 +1,20 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Something went wrong";
+}
+
+<div class="error-page">
+    <h4 class="headline text-red">500</h4>
+    <br />
+    <div class="error-content">
+        <h3><i class="fa fa-warning text-red"></i> Something went wrong. <br /><small>We sent this error to support they contact you ASAP. <br /> <small>*For More details call <a href="tel:+917383380316">+91 73833 80316</a> or email <a href="mailto:jenish.zinzuvadiya@hotmail.com">jenish.zinzuvadiya@hotmail.com</a></small></small> </h3>
+        <a href="javascript:history.go(-1)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+        <a href="@Url.Action("Index","Home")" class="btn btn-info"><i class="fa fa-dashboard"></i> Dashboard</a>
+    </div>
+</div>
+
+@*<h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger"></h2>
+    <a href="javascript:history.go(-1)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+    <a href="@Url.Action("Index","Home")" class="btn btn-info"><i class="fa fa-dashboard"></i> Dashboard</a>*@

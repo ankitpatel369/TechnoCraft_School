@@ -1,0 +1,34 @@
+Admin Module
+    --> Admission Management
+            --> Add / Update Admission Criteria
+                (For Ex.--> Minimum 55% is required for eligible criteria.)
+            --> Documents for admission
+                (For Ex.--> Which type of document is required for admission.)
+            --> Add New Admission
+                (Student Personal Details, Contact Details, Details of Last Attempted.)
+            --> Conform Admission 
+    --> Faculty Management
+            --> Add / Update New Faculty
+                (For Ex.--> Faculty Personal Details, Contact Details, Educational Qualification, Experience, Joining Date, 
+                 Faculty Types (Regular,Sports,Admin)) 
+            --> Allocate Subject or Class
+                (For Ex.--> Allocate Subject to faculty, Allocate Class to faculty)
+            --> 
+    --> Student Management
+            --> Add / Update New Student
+                (Student Personal Details, Contact Details, Details of Last Attempted.)
+    
+Faculty Module
+    --> Display Faculty Profile
+    --> Display Allocated Course or Standard Details 
+    --> Fill Student Attendance only allocated class
+    --> Upload Material for allocated Standard ( class ) students
+    --> Approved leave of students
+    --> Upload Exam for allocated Standard ( class ) students
+    
+Attendance & Leave Management
+    --> Daily Attendance
+    --> Weekly report
+    --> Monthly Report
+    --> Annual Report
+    

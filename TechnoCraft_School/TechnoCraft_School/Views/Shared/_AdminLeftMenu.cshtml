@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNet.Identity
+
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+                <a href="@Url.Action("Index","Home")">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i> <span> Settings </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-university"></i> Institution Details <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Add", "Institute")"><i class="fa fa-circle-o"></i> Add Institution Details </a></li>
+                            <li><a href="@Url.Action("Index", "Institute")"><i class="fa fa-circle-o"></i> View Institution Details </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("Create", "AcademicYear")"><i class="fa fa-list-alt"></i> Academic Details </a></li>
+                    @*<li><a href="@Url.Action("Approval", "Leave_Application_Detail")"><i class="fa fa-check-square-o"></i> Leave Approval </a></li>
+                        <li><a href="@Url.Action("Incharge", "Leave_Application_Detail")"><i class="fa fa-exchange"></i> Incharge </a></li>*@
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-book"></i> <span> Academic </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-graduation-cap"></i> Course & Class <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Create", "Course")"><i class="fa fa-circle-o"></i> Course </a></li>
+                            <li><a href="@Url.Action("Create", "Standard")"><i class="fa fa-circle-o"></i> Standard </a></li>
+                            <li><a href="@Url.Action("Create", "Classes")"><i class="fa fa-circle-o"></i> Class </a></li>
+                            <li><a href="@Url.Action("Create", "Division")"><i class="fa fa-circle-o"></i> Division </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-book"></i> Subject <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Subjects </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Assign Subjects </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Subject Allocation </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Elective Subject </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-calculator"></i>
+                    <span> HR & Payroll </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-users"></i> Employee Management <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Add User Type </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Add Department </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Add Designation </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Add Employee </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-edit"></i> Leave Management </a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span> Student </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Create","Students")"><i class="fa fa-user-plus"></i> Add Student </a></li>
+                    <li><a href="#"><i class="fa fa-user-plus"></i> Student Addmission </a></li>
+                    <li><a href="#"><i class="fa fa-list-alt"></i> Attendance </a></li>
+                    <li><a href="#"><i class="fa fa-list-alt"></i> Student List </a></li>
+                    <li><a href="#"><i class="fa fa-list-alt"></i> Guardian List </a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-sitemap"></i>
+                    <span> Roles Management </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Index", "RolesManager")"><i class="fa fa-plus-square"></i> Create New Role </a></li>
+                    <li><a href="@Url.Action("ManageUserRoles", "RolesManager")"><i class="fa fa-user"></i> Manage User Role </a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa  fa-cogs"></i>
+                    <span> Manage Profile </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("ChangePassword", "Manage")"><i class="fa fa-key"></i> Change Password </a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
