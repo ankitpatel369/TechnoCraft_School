@@ -214,9 +214,9 @@
     <Compile Include="Utils\ImageUploader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\MatrukrupaDb.mdf" />
-    <Content Include="App_Data\MatrukrupaDb_log.ldf">
-      <DependentUpon>MatrukrupaDb.mdf</DependentUpon>
+    <Content Include="App_Data\School.mdf" />
+    <Content Include="App_Data\School_log.ldf">
+      <DependentUpon>School.mdf</DependentUpon>
     </Content>
     <Content Include="Content\AdminLTE\AdminLTE.css" />
     <Content Include="Content\AdminLTE\AdminLTE.min.css" />
