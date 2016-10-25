@@ -18,7 +18,7 @@ namespace TechnoCraftSchool_Model
 
         [Required]
         [Display(Name = "General Register No")]
-        [Key, Column(Order = 1)]
+        //[Key, Column(Order = 1)]
         public long GR_No { get; set; }
 
         [Required]
@@ -33,9 +33,8 @@ namespace TechnoCraftSchool_Model
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
         [DataType(DataType.Upload)]
-        [Display(Name ="Student Photo")]
+        [Display(Name ="Photo")]
         public string StudentPhoto { get; set; }
 
         [Required]
