@@ -3,9 +3,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using TechnoCraftSchool_Model;
 using System.Web;
 using System;
+using System.Collections.Generic;
+using TechnoCraftSchool_Model;
+using TechnoCraft_School.Utils.Notification;
 
 namespace TechnoCraft_School.Controllers
 {
@@ -17,7 +19,12 @@ namespace TechnoCraft_School.Controllers
         {
             ViewBag.Gender = helper.SelectGender();
             ViewBag.BloodGroup = helper.SelectBloodGroup();
-            ViewBag.Course_ID = new SelectList(db.Courses, "Course_ID", "CourseName");
+
+            List<Course> Courses = db.Courses.ToList();
+            Courses.Insert(0, new Course { Course_ID = 0, CourseName = "-- Select Course --" });
+            SelectList selectListCourse = new SelectList(Courses, "Course_ID", "CourseName", 0);
+            ViewBag.Course_ID = selectListCourse;
+
             ViewBag.Standard_ID = new SelectList(db.Standards, "Standard_ID", "StandardName");
             ViewBag.Class_ID = new SelectList(db.Classes, "Class_ID", "ClassName");
             ViewBag.Division_ID = new SelectList(db.Divisions, "Division_ID", "DivisionName");
@@ -26,13 +33,81 @@ namespace TechnoCraft_School.Controllers
         // GET: Students
         public ActionResult Index()
         {
-            ViewBag.Course_ID = new SelectList(db.Courses, "Course_ID", "CourseName");
-            ViewBag.Standard_ID = new SelectList(db.Students, "Standard_ID", "StandardName");
-            ViewBag.Class_ID = new SelectList(db.Classes, "Class_ID", "ClassName");
-
-            return View(db.Students.ToList());
+            return View();
         }
 
+        #region  Fill DropDownList Methods
+
+        [HttpGet]
+        [AjaxMessagesFilter]
+        public ActionResult GetStandard(int Course_ID)
+        {
+            if (Course_ID == null)
+            {
+                this.ShowMessage(MessageType.Error, "Standard not found.", false, true);
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+
+            var StandardList = db.Standards.Where(c => c.Course_ID == Course_ID).Select(s => new { s.Standard_ID, s.StandardName });
+
+            return Json(StandardList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AjaxMessagesFilter]
+        public ActionResult GetClass(int Standard_ID)
+        {
+            if (Standard_ID == null)
+            {
+                this.ShowMessage(MessageType.Error, "Class not found.", false, true);
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+
+            var ClassList = db.Classes.Where(c => c.Standard_ID == Standard_ID).Select(c => new { c.Class_ID, c.ClassName });
+
+            return Json(ClassList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AjaxMessagesFilter]
+        public ActionResult GetDivision(int Division_ID)
+        {
+            if (Division_ID == null)
+            {
+                this.ShowMessage(MessageType.Error, "Division not found.", false, true);
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+
+            var DivisionList = db.Divisions.Where(d => d.Division_ID == Division_ID).Select(d => new {d.Division_ID  , d.DivisionName});
+
+            return Json(DivisionList, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        // Post: Students
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Index(int Course_ID, int Standard_ID, int Class_ID)
+        {
+            try
+            {
+                ViewBag.StoreData = Course_ID + ',' + Standard_ID + ',' + Class_ID;
+                return View(db.Students.Where(s => s.Course_ID == Course_ID).Where(s => s.Standard_ID == Standard_ID).Where(s => s.Class_ID == Class_ID).ToList());
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageType.Error, ex.Message, true, false);
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Refresh(string StoreData)
+        {
+            string[] Ids = StoreData.Split(',');
+            var StudentList = db.Students.Where(s => s.Course_ID == Convert.ToInt32(Ids[0])).Where(s => s.Standard_ID == Convert.ToInt32(Ids[1])).Where(s => s.Class_ID == Convert.ToInt32(Ids[2])).ToList();
+            return Json(true,JsonRequestBehavior.AllowGet);
+        }
         // GET: Students/Details/5
         public ActionResult Details(int? id)
         {
@@ -51,16 +126,10 @@ namespace TechnoCraft_School.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
-            //ViewBag.Course_ID = new SelectList(db.Courses, "Course_ID", "CourseName");
-            //ViewBag.Standard_ID = new SelectList(db.Students, "Standard_ID", "StandardName");
-            //ViewBag.Class_ID = new SelectList(db.Classes, "Class_ID", "ClassName");
-
             return View();
         }
 
         // POST: Students/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Students model, HttpPostedFileBase StudentPhoto)
@@ -69,20 +138,27 @@ namespace TechnoCraft_School.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    string CourseName = db.Courses.Find(model.Course_ID).CourseName;
-                    string StandardName = db.Standards.Find(model.Standard_ID).StandardName;
+                    string tryCatchFileName = string.Empty;
                     try
                     {
                         using (ImageUploader imageUploader = new ImageUploader())
                         {
-                            string fileName = CourseName + '-' + StandardName + '-' + StudentPhoto.FileName + '-' + DateTime.Now.Ticks;
+                            //string fileName = StudentPhoto.FileName.Replace(' ', '-') + "-" + DateTime.Now.Ticks;
+
+                            string fileName = Guid.NewGuid().ToString("N") + '-' + StudentPhoto.FileName;
                             string location = Server.MapPath("~/Content/StudentPhotos");
-                            model.StudentPhoto = "/Content/StudentPhotos/" + imageUploader.UploadImage(StudentPhoto, fileName, location);
+                            model.StudentPhoto = "/Content/StudentPhotos/" + imageUploader.UploadImage(StudentPhoto, fileName.Trim(), location);
+                            tryCatchFileName = fileName;
+
                         }
                     }
-                    catch (ArgumentException ex)
+                    catch (Exception ex)
                     {
-                        ModelState.AddModelError("", ex.Message);
+                        using (ImageUploader imageUploader = new ImageUploader())
+                        {
+                            imageUploader.DeleteImage(tryCatchFileName);
+                        }
+                        AddModelErrors(ex.Message);
                         return View(model);
                     }
 
@@ -96,7 +172,7 @@ namespace TechnoCraft_School.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Model State is not valid.");
+                    AddModelErrors();
                     return View(model);
                 }
             }
@@ -116,6 +192,7 @@ namespace TechnoCraft_School.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+
                 Students students = db.Students.Find(id);
                 if (students == null)
                 {
@@ -136,58 +213,72 @@ namespace TechnoCraft_School.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, Students model, HttpPostedFileBase StudentPhoto)
+        public ActionResult Edit(int? id, string ProfilePic, /*[Bind(Exclude = "Date_Of_Admission,Year_Of_Admission,Student_Status_ID")]*/ Students model, HttpPostedFileBase StudentPhoto)
         {
             try
             {
-                //ViewBag.Course_ID = new SelectList(db.Courses, "Course_ID", "CourseName");
-                //ViewBag.Standard_ID = new SelectList(db.Students, "Standard_ID", "StandardName");
-                //ViewBag.Class_ID = new SelectList(db.Classes, "Class_ID", "ClassName");
-                //ViewBag.Student_Status_ID = new SelectList(db.Student_Status, "Student_Status_ID", "StudentStatus");
                 if (id == null)
                 {
-                    ModelState.AddModelError("", "No Student found !");
-                    return View();
+                    AddModelErrors();
+                    return View(model);
                 }
                 if (ModelState.IsValid)
                 {
-                    var student = db.Students.Attach(model);
-                    var studentEntry = db.Entry(model);
-
                     try
                     {
-                        //Upload StudentPhoto here.
-                        if (StudentPhoto != null)
+                        var student = db.Students.Attach(model);
+                        var studentEntry = db.Entry(model);
+
+                        string tryCatchFileName = string.Empty;
+                        try
+                        {
+                            //Upload StudentPhoto here.
+                            if (StudentPhoto != null)
+                            {
+                                using (ImageUploader imageUploader = new ImageUploader())
+                                {
+                                    //string fileName = StudentPhoto.FileName.Replace(' ', '-') + "-" + DateTime.Now.Ticks;
+                                    ;
+                                    string fileName = Guid.NewGuid().ToString("N") + '-' + StudentPhoto.FileName;
+                                    string location = Server.MapPath("~/Content/StudentPhotos");
+                                    model.StudentPhoto = "/Content/StudentPhotos/" + imageUploader.UploadImage(StudentPhoto, fileName.Trim(), location);
+                                    tryCatchFileName = fileName;
+
+                                    imageUploader.DeleteImage(ProfilePic);
+                                }
+                            }
+                            else 
+                            {
+                                model.StudentPhoto = ProfilePic;
+                            }
+                        }
+                        catch (Exception ex)
                         {
                             using (ImageUploader imageUploader = new ImageUploader())
                             {
-                                string fileName = model.StudentPhoto.Replace(' ', '-') + "-" + DateTime.Now.Ticks;
-
-                                string oldImageLocation = Server.MapPath(model.StudentPhoto);
-                                string location = Server.MapPath("~/Content/StudentPhotos");
-                                model.StudentPhoto = "/Content/StudentPhotos/" + imageUploader.UploadImage(StudentPhoto, fileName, location);
-
-                                imageUploader.DeleteImage(oldImageLocation);
+                                imageUploader.DeleteImage(tryCatchFileName);
                             }
+                            AddModelErrors(ex.Message);
+                            return View(model);
                         }
-
+                        studentEntry.State = EntityState.Modified;
+                        db.SaveChanges();
+                        ModelState.Clear();
+                        return RedirectToAction("Index");
                     }
-                    catch (ArgumentException ex)
+                    catch (Exception ex)
                     {
-                        ModelState.AddModelError("", ex.Message);
+                        AddModelErrors(ex.Message);
                         return View(model);
                     }
-                    studentEntry.State = EntityState.Modified;
-                    db.SaveChanges();
-                    ModelState.Clear();
-                    return RedirectToAction("Index");
                 }
+                AddModelErrors();
                 return View(model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", ex.Message);
-                return View();
+                AddModelErrors(ex.Message);
+                return View(model);
             }
         }
 
@@ -208,7 +299,6 @@ namespace TechnoCraft_School.Controllers
 
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Students students = db.Students.Find(id);
@@ -216,6 +306,8 @@ namespace TechnoCraft_School.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

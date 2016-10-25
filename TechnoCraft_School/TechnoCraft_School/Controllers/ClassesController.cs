@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using TechnoCraft_School.Utils;
 using TechnoCraftSchool_Model;
+using TechnoCraft_School.Utils.Notification;
+
 
 namespace TechnoCraft_School.Controllers
 {
@@ -46,12 +47,13 @@ namespace TechnoCraft_School.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Class_ID,Standard_ID,ClassName,ClassAlias,IsActive")] Class @class)
+        public ActionResult Create(Class @class)
         {
             if (ModelState.IsValid)
             {
                 db.Classes.Add(@class);
                 db.SaveChanges();
+                this.ShowMessage(MessageType.Success, "Class added successfully.", true);
                 return RedirectToAction("Index");
             }
 

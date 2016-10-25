@@ -58,7 +58,10 @@ namespace TechnoCraft_School.Utils
         {
             try
             {
-                File.Delete(location);
+                if (File.Exists(location))
+                {
+                    File.Delete(location);
+                }
             }
             catch (Exception ex)
             {

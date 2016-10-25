@@ -1,4 +1,5 @@
-﻿@*
+﻿@using TechnoCraft_School.Utils.Notification;
+@*
     This partial controls the top menu of the AdminLTE Template, being called automatically by _AdminLteLayout
        TODO: All of the content in here is stand-in that must be replaced by the real behavior of your app
 *@
@@ -9,6 +10,10 @@
 @*@if (Request.IsAuthenticated)
     {*@
 <header class="main-header">
+    <div id="mvcNotify" style="display:none">
+        @Html.RenderMessages()
+    </div>
+
     <!-- Logo -->
     <a href="@Url.Action("Index", "Home")" class="logo">
         <img src="~/Content/AdminLTE/img/logo_for_Addressbar.png" height="30" width="30" />

@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TechnoCraft_School</RootNamespace>
     <AssemblyName>TechnoCraft_School</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>7463</IISExpressSSLPort>
@@ -67,9 +67,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -202,6 +202,18 @@
     <Compile Include="Migrations\201610090929332_UpdateStudent.Designer.cs">
       <DependentUpon>201610090929332_UpdateStudent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610211530222_UpdateStudentTable.cs" />
+    <Compile Include="Migrations\201610211530222_UpdateStudentTable.Designer.cs">
+      <DependentUpon>201610211530222_UpdateStudentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610230628322_StudentTableUpDate.cs" />
+    <Compile Include="Migrations\201610230628322_StudentTableUpDate.Designer.cs">
+      <DependentUpon>201610230628322_StudentTableUpDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610240748160_UpdateStudentTable1.cs" />
+    <Compile Include="Migrations\201610240748160_UpdateStudentTable1.Designer.cs">
+      <DependentUpon>201610240748160_UpdateStudentTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelBinders\DynamicJsonModelBinder.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -209,6 +221,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Notification\AjaxMessagesFilter.cs" />
+    <Compile Include="Utils\Notification\ControllerExtensions.cs" />
+    <Compile Include="Utils\Notification\HtmlHelperExtensions.cs" />
+    <Compile Include="Utils\Notification\MessageType.cs" />
     <Compile Include="Utils\StudentHelper.cs" />
     <Compile Include="Utils\ControllerExtensions.cs" />
     <Compile Include="Utils\ImageUploader.cs" />
@@ -275,8 +291,11 @@
     <Content Include="Content\bus.chart.style.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts-googleapis.css" />
+    <Content Include="Content\GeneralStyles.css" />
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\Loginstyle.css" />
+    <Content Include="Content\mvcNotify.css" />
+    <Content Include="Content\StudentPhotos\avatar5.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -527,12 +546,102 @@
     <Content Include="Scripts\AdminLTE\plugins\colorpicker\img\saturation.png" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\dataTables.bootstrap.css" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\css\dataTables.bootstrap.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\css\dataTables.bootstrap.min.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\css\buttons.bootstrap.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\css\buttons.bootstrap.min.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\js\buttons.bootstrap.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\js\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.colVis.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.flash.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.flash.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.html5.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.html5.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.print.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\buttons.print.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\dataTables.buttons.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader-bs\css\fixedHeader.bootstrap.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader-bs\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader-bs\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader\js\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-keytable\js\dataTables.keyTable.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-keytable\js\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-keytable\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\css\responsive.bootstrap.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\css\responsive.bootstrap.min.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\js\responsive.bootstrap.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive\js\dataTables.responsive.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller-bs\css\scroller.bootstrap.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller-bs\css\scroller.bootstrap.min.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller-bs\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller\js\dataTables.scroller.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller\js\dataTables.scroller.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller\License.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net\js\jquery.dataTables.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net\License.txt" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\images\sort_asc.png" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\images\sort_asc_disabled.png" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\images\sort_both.png" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\images\sort_desc.png" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\images\sort_desc_disabled.png" />
     <Content Include="Scripts\AdminLTE\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\dist\jszip.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\dist\jszip.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\docs\APPNOTE.TXT" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\docs\references.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\docs\ZIP spec.txt" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\css\main.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\css\pygments.css" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\examples\download-zip-file.html" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\examples\downloader.html" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\examples\downloader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\examples\get-binary-files-ajax.html" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\examples\read-local-file-api.html" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\_layouts\default.html" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\Gruntfile.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\index.html" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\arrayReader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\base64.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\compressedObject.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\compressions.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\crc32.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\dataReader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\defaults.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\deprecatedPublicUtils.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\flate.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\index.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\license_header.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\load.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\nodeBuffer.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\nodeBufferReader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\object.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\signature.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\stringReader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\stringWriter.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\support.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\uint8ArrayReader.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\uint8ArrayWriter.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\utf8.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\utils.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\zipEntries.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\lib\zipEntry.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\vendor\FileSaver.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\build\pdfmake.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\build\pdfmake.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\build\vfs_fonts.js" />
     <Content Include="Scripts\AdminLTE\plugins\datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\AdminLTE\plugins\datepicker\datepicker3.css" />
     <Content Include="Scripts\AdminLTE\plugins\datepicker\locales\bootstrap-datepicker.ar.js" />
@@ -590,6 +699,50 @@
     <Content Include="Scripts\AdminLTE\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Scripts\AdminLTE\plugins\fastclick\fastclick.js" />
     <Content Include="Scripts\AdminLTE\plugins\fastclick\fastclick.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\css\fileinput.css" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\css\fileinput.min.css" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\img\loading-sm.gif" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\img\loading.gif" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\fileinput.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\fileinput.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\ar.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\bg.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\ca.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\cr.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\cz.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\da.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\de.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\el.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\es.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\fa.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\fi.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\fr.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\hu.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\id.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\it.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\ja.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\LANG.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\nl.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\pl.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\pt-BR.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\pt.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\ro.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\ru.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\sk.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\th.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\tr.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\uk.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\vi.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\zh-TW.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\locales\zh.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\plugins\canvas-to-blob.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\plugins\canvas-to-blob.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\plugins\purify.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\plugins\purify.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\plugins\sortable.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\js\plugins\sortable.min.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\themes\fa\theme.js" />
+    <Content Include="Scripts\AdminLTE\plugins\FileInput\themes\gly\theme.js" />
     <Content Include="Scripts\AdminLTE\plugins\flot\excanvas.js" />
     <Content Include="Scripts\AdminLTE\plugins\flot\excanvas.min.js" />
     <Content Include="Scripts\AdminLTE\plugins\flot\jquery.colorhelpers.js" />
@@ -824,7 +977,6 @@
     <Content Include="Scripts\AdminLTE\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Scripts\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Scripts\AdminLTE\plugins\timepicker\bootstrap-timepicker.min.js" />
-    <Content Include="Scripts\Booking\Booking.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -840,16 +992,72 @@
     <Content Include="Scripts\AdminLTE\plugins\ckeditor\skins\moono\readme.md" />
     <Content Include="Scripts\AdminLTE\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Scripts\AdminLTE\plugins\input-mask\phone-codes\phone-codes.json" />
-    <Content Include="Scripts\contextmenu\cmenu-gloss-cyan-menu-item-hover.gif" />
-    <Content Include="Scripts\contextmenu\cmenu-gloss-menu-item-hover.gif" />
-    <Content Include="Scripts\contextmenu\cmenu-gloss-semitransparent-menu-item-hover.png" />
-    <Content Include="Scripts\contextmenu\cmenu-human-menu-item-hover.gif" />
-    <Content Include="Scripts\contextmenu\cmenu-osx-menu-item-hover.gif" />
-    <Content Include="Scripts\contextmenu\cmenu-vista-bg.gif" />
-    <Content Include="Scripts\contextmenu\cmenu-vista-menu-item-hover.gif" />
-    <Content Include="Scripts\contextmenu\cmenu-xp-bg.gif" />
-    <Content Include="Scripts\contextmenu\jquery.contextmenu.css" />
-    <Content Include="Scripts\contextmenu\jquery.contextmenu.js" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-bs\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons-bs\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-buttons\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader-bs\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader-bs\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader-bs\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-fixedheader\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-keytable\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-keytable\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-keytable\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive-bs\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-responsive\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller-bs\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller-bs\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller-bs\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net-scroller\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\datatables.net\Readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\CHANGES.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\component.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\constructor.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\constructor_load.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\file_data.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\file_name.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\file_regex.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\filter.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\folder_data.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\folder_regex.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\generate.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\load.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\remove.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_jszip\support.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\api_zipobject.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\contributing.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\examples.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\faq.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\howto\read_zip.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\howto\write_zip.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\limitations.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\documentation\upgrade_guide.md" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\LICENSE.markdown" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\package.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\README.markdown" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\jszip\_config.yml" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\.bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\bower.json" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\build\pdfmake.min.js.map" />
+    <Content Include="Scripts\AdminLTE\plugins\datatables\pdfmake\LICENSE" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -870,6 +1078,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\mvcNotify.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -960,20 +1169,12 @@
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\StudentPhotos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TechnoCraftSchool_Model\TechnoCraftSchool_Model.csproj">
-      <Project>{3ded0ae6-6c7e-4e88-9ebe-628c452a4aa1}</Project>
-      <Name>TechnoCraftSchool_Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610061513040_Create.resx">
@@ -994,6 +1195,21 @@
     <EmbeddedResource Include="Migrations\201610090929332_UpdateStudent.resx">
       <DependentUpon>201610090929332_UpdateStudent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610211530222_UpdateStudentTable.resx">
+      <DependentUpon>201610211530222_UpdateStudentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610230628322_StudentTableUpDate.resx">
+      <DependentUpon>201610230628322_StudentTableUpDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610240748160_UpdateStudentTable1.resx">
+      <DependentUpon>201610240748160_UpdateStudentTable1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechnoCraftSchool_Model\TechnoCraftSchool_Model.csproj">
+      <Project>{3ded0ae6-6c7e-4e88-9ebe-628c452a4aa1}</Project>
+      <Name>TechnoCraftSchool_Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

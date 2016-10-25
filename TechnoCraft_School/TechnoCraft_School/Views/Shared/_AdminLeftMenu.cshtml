@@ -3,6 +3,8 @@
 }
 @using Microsoft.AspNet.Identity
 
+@if (Request.IsAuthenticated)
+{
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -91,7 +93,7 @@
                     <li><a href="@Url.Action("Create","Students")"><i class="fa fa-user-plus"></i> Add Student </a></li>
                     <li><a href="#"><i class="fa fa-user-plus"></i> Student Addmission </a></li>
                     <li><a href="#"><i class="fa fa-list-alt"></i> Attendance </a></li>
-                    <li><a href="#"><i class="fa fa-list-alt"></i> Student List </a></li>
+                    <li><a href="@Url.Action("Index","Students")"><i class="fa fa-list-alt"></i> Student List </a></li>
                     <li><a href="#"><i class="fa fa-list-alt"></i> Guardian List </a></li>
                 </ul>
             </li>
@@ -123,3 +125,4 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+}

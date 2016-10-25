@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     <div class="tabbable">
                         <div class="tab-content">
-                            @using (Html.BeginForm("Create","Students",FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Create", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.AntiForgeryToken()
 
@@ -241,21 +241,27 @@
                                                         <div class="form-group">
                                                             @Html.LabelFor(model => model.Course_ID, htmlAttributes: new { @class = "control-label" })
                                                             @Html.DropDownListFor(model => model.Course_ID, (IEnumerable<SelectListItem>
-                                                            )ViewBag.Course_ID, "-- Select --", new { @class = "form-control select2" })
+                                                            )ViewBag.Course_ID, new { @class = "form-control select2" })
                                                             @Html.ValidationMessageFor(model => model.Course_ID, "", new { @class = "text-danger" })
                                                         </div>
 
                                                         <div class="form-group">
                                                             @Html.LabelFor(model => model.Standard_ID, htmlAttributes: new { @class = "control-label" })
-                                                            @Html.DropDownListFor(model => model.Standard_ID, (IEnumerable<SelectListItem>
-                                                            )ViewBag.Standard_ID,"-- Select --", new { @class = "form-control select2" })
+                                                            <select id="Standard_ID" name="Standard_ID" class="form-control hide-search" style="width:100%">
+                                                                <option value="0"> -- Select Standard -- </option>
+                                                            </select>
+                                                            @*@Html.DropDownListFor(model => model.Standard_ID, (IEnumerable<SelectListItem>
+                                                            )ViewBag.Standard_ID, "-- Select --", new { @class = "form-control select2" })*@
                                                             @Html.ValidationMessageFor(model => model.Standard_ID, "", new { @class = "text-danger" })
                                                         </div>
 
                                                         <div class="form-group">
                                                             @Html.LabelFor(model => model.Class_ID, htmlAttributes: new { @class = "control-label" })
-                                                            @Html.DropDownListFor(model => model.Class_ID, (IEnumerable<SelectListItem>
-                                                            )ViewBag.Class_ID, "-- Select --", new { @class = "form-control select2" })
+                                                            <select id="Class_ID" name="Class_ID" class="form-control hide-search" style="width:100%">
+                                                                <option value="0"> -- Select Class -- </option>
+                                                            </select>
+                                                            @*@Html.DropDownListFor(model => model.Class_ID, (IEnumerable<SelectListItem>
+                                                            )ViewBag.Class_ID, "-- Select --", new { @class = "form-control select2" })*@
                                                             @Html.ValidationMessageFor(model => model.Class_ID, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
@@ -266,8 +272,11 @@
                                                     <div class="panel-body">
                                                         <div class="form-group">
                                                             @Html.LabelFor(model => model.Division_ID, htmlAttributes: new { @class = "control-label" })
-                                                            @Html.DropDownListFor(model => model.Division_ID, (IEnumerable<SelectListItem>
-                                                            )ViewBag.Division_ID, "-- Select --", new { @class = "form-control select2" })
+                                                            <select id="Division_ID" name="Division_ID" class="form-control hide-search" style="width:100%">
+                                                                <option value="0"> -- Select Division -- </option>
+                                                            </select>
+                                                            @*@Html.DropDownListFor(model => model.Division_ID, (IEnumerable<SelectListItem>
+                                                            )ViewBag.Division_ID, "-- Select --", new { @class = "form-control select2" })*@
                                                             @Html.ValidationMessageFor(model => model.Division_ID, "", new { @class = "text-danger" })
                                                         </div>
                                                         <div class="form-group">
@@ -277,31 +286,22 @@
                                                             @Html.ValidationMessageFor(model => model.Student_Status_ID, "", new { @class = "text-danger" })
                                                         </div>
 
-                                                        @*<div class="form-group">
-                                                           @Html.LabelFor(model => model.Date_Of_Admission, htmlAttributes: new { @class = "control-label" })
-                                                           @Html.EditorFor(model => model.Date_Of_Admission, new { htmlAttributes = new { @class = "year form-control",Value=DateTime.Now.Year, disabled = "disabled" } })
-                                                           @Html.ValidationMessageFor(model => model.Date_Of_Admission, "", new { @class = "text-danger" })
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                               @Html.LabelFor(model => model.Year_Of_Admission, htmlAttributes: new { @class = "control-label" })
-                                                               @Html.EditorFor(model => model.Year_Of_Admission, new { htmlAttributes = new { @class = "form-control" } })
-                                                               @Html.ValidationMessageFor(model => model.Year_Of_Admission, "", new { @class = "text-danger" })
-                                                        </div>
-
                                                         <div class="form-group">
                                                             @Html.LabelFor(model => model.GR_No, htmlAttributes: new { @class = "control-label" })
                                                             @Html.EditorFor(model => model.GR_No, new { htmlAttributes = new { @class = "form-control" } })
                                                             @Html.ValidationMessageFor(model => model.GR_No, "", new { @class = "text-danger" })
-                                                        </div>*@
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Create" class="btn btn-default" />
+                                        <div class="col-md-12">
+                                            <div class="box-header">
+                                                <center>
+                                                    <button type="submit" value="Create" class="btn btn-primary">
+                                                        Create
+                                                    </button>
+                                                </center>
                                             </div>
                                         </div>
                                     </div>
@@ -314,6 +314,131 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        //$("#ddlmessage").empty();
+        $("#Standard_ID").prop("disabled", true);
+        $("#Class_ID").prop("disabled", true);
+        $("#Division_ID").prop("disabled", true);
+
+        // Fill Standard DropDown
+        $("#Course_ID").change(function () {
+            var Course_ID = $("#Course_ID").val();
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '@Url.Action("GetStandard")',
+                data: { "Course_ID": Course_ID },
+                success: function (json, textStatus) {
+                    $("#Standard_ID").empty();
+                    $("#Standard_ID").append('<option value="0"> -- Select Standard -- </option>');
+                    json = json || {};
+                    if (json.length != 0) {
+                        for (var i = 0; i < json.length; i++) {
+                            $("#Standard_ID").append('<option value="' + json[i].Standard_ID + '">' + json[i].StandardName + '</option>');
+                        }
+                        $("#ddlmessage").empty();
+                        $("#Standard_ID").prop("disabled", false);
+                    }
+                    else {
+                        $("#ddlmessage").empty();
+
+
+                        $("#Standard_ID").empty();
+                        $("#Standard_ID").append('<option value="0"> -- Select Standard -- </option>');
+                        $("#Standard_ID").select2({ minimumResultsForSearch: Infinity });
+                        $("#Standard_ID").prop("disabled", true);
+
+                        $("#Class_ID").empty();
+                        $("#Class_ID").append('<option value="0"> -- Select Class -- </option>');
+                        $("#Class_ID").select2({ minimumResultsForSearch: Infinity });
+                        $("#Class_ID").prop("disabled", true);
+
+                        $("#Division_ID").empty();
+                        $("#Division_ID").append('<option value="0"> -- Select Division -- </option>');
+                        $("#Division_ID").select2({ minimumResultsForSearch: Infinity });
+                        $("#Division_ID").prop("disabled", true);
+
+
+                        if ($("#Course_ID").val() != 0) {
+                            $("#ddlmessage").append('No Standard Found.');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Fill Class DropDown
+        $("#Standard_ID").change(function () {
+            var Standard_ID = $("#Standard_ID").val();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '@Url.Action("GetClass")',
+                data: { "Standard_ID": Standard_ID },
+                success: function (json, textStatus) {
+                    $("#Class_ID").empty();
+                    $("#Class_ID").append('<option value="0"> -- Select Class -- </option>');
+                    json = json || {};
+                    if (json.length != 0) {
+                        for (var i = 0; i < json.length; i++) {
+                            $("#Class_ID").append('<option value="' + json[i].Class_ID + '">' + json[i].ClassName + '</option>');
+                        }
+                        $("#ddlmessage").empty();
+                        $("#Class_ID").prop("disabled", false);
+                    }
+                    else {
+                        $("#ddlmessage").empty();
+
+                        $("#Class_ID").empty();
+                        $("#Class_ID").append('<option value="0"> -- Select Class -- </option>');
+                        $("#Class_ID").select2({ minimumResultsForSearch: Infinity });
+                        $("#Class_ID").prop("disabled", true);
+
+                        if ($("#Standard_ID").val() != 0) {
+                            $("#ddlmessage").append('No Class Found.');
+                        }
+                    }
+                }
+            });
+        });
+
+        $("#Class_ID").change(function () {
+            var Division_ID = $("#Division_ID").val();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '@Url.Action("GetDivision")',
+                data: { "Division_ID": Division_ID },
+                success: function (json, textStatus) {
+                    $("#Division_ID").empty();
+                    $("#Division_ID").append('<option value="0"> -- Select Division -- </option>');
+                    json = json || {};
+                    if (json.length != 0) {
+                        for (var i = 0; i < json.length; i++) {
+                            $("#Division_ID").append('<option value="' + json[i].Division_ID + '">' + json[i].DivisionName + '</option>');
+                        }
+                        $("#ddlmessage").empty();
+                        $("#Division_ID").prop("disabled", false);
+                    }
+                    else {
+                        $("#ddlmessage").empty();
+
+                        $("#Division_ID").empty();
+                        $("#Division_ID").append('<option value="0"> -- Select Division -- </option>');
+                        $("#Division_ID").select2({ minimumResultsForSearch: Infinity });
+                        $("#Division_ID").prop("disabled", true);
+
+                        if ($("#Class_ID").val() != 0) {
+                            $("#ddlmessage").append('No Division Found.');
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
