@@ -72,6 +72,7 @@
     <Compile Include="Standard\Standard.cs" />
     <Compile Include="Students\Student_Status.cs" />
     <Compile Include="Students\Students.cs" />
+    <Compile Include="Subjects\Subjectassign.cs" />
     <Compile Include="Subjects\Subjects.cs" />
   </ItemGroup>
   <ItemGroup>

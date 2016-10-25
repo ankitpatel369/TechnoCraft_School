@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace TechnoCraftSchool_Model
+namespace TechnoCraftSchool_Model.Subjects
 {
     [Table("Subjects")]
     public class Subjects
