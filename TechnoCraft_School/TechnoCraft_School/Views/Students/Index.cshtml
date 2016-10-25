@@ -296,7 +296,6 @@
 
     function generateDeleteButtonLinks() {
         $('.delete-Student').click(function (event) {
-
             // cancel user deletion if confirmation is negative
             var result = confirm("Do you really want to delete ?");
             if (!result)
@@ -320,10 +319,10 @@
     function refreshStudentsTable() {
         $("#loading").show();
         $("#dtStudents tbody tr").remove();
-
+        var StoreData = $("#StoreData").val();
         $.ajax({
             type: 'POST',
-            url: '@Url.Action("Refresh")' + $("#StoreData").val(),
+            url: '/Students/Refresh/' + $("#StoreData").val(),
             dataType: 'json',
             success: function (data) {
                 var items = '';

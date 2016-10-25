@@ -53,3 +53,17 @@ E:\School Management\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Micros
 E:\School Management\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.dll
 E:\School Management\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.pdb
 E:\School Management\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.csprojResolveAssemblyReference.cache
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\TechnoCraftSchool_Model.dll.config
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\TechnoCraftSchool_Model.dll
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\TechnoCraftSchool_Model.pdb
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\EntityFramework.dll
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\EntityFramework.xml
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.csprojResolveAssemblyReference.cache
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.dll
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.pdb

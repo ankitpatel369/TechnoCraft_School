@@ -78,7 +78,7 @@ namespace TechnoCraft_School.Controllers
                 return Json("", JsonRequestBehavior.AllowGet);
             }
 
-            var DivisionList = db.Divisions.Where(d => d.Division_ID == Division_ID).Select(d => new {d.Division_ID  , d.DivisionName});
+            var DivisionList = db.Divisions.Where(d => d.Division_ID == Division_ID).Select(d => new { d.Division_ID, d.DivisionName });
 
             return Json(DivisionList, JsonRequestBehavior.AllowGet);
         }
@@ -106,7 +106,7 @@ namespace TechnoCraft_School.Controllers
         {
             string[] Ids = StoreData.Split(',');
             var StudentList = db.Students.Where(s => s.Course_ID == Convert.ToInt32(Ids[0])).Where(s => s.Standard_ID == Convert.ToInt32(Ids[1])).Where(s => s.Class_ID == Convert.ToInt32(Ids[2])).ToList();
-            return Json(true,JsonRequestBehavior.AllowGet);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
         // GET: Students/Details/5
         public ActionResult Details(int? id)
@@ -247,7 +247,7 @@ namespace TechnoCraft_School.Controllers
                                     imageUploader.DeleteImage(ProfilePic);
                                 }
                             }
-                            else 
+                            else
                             {
                                 model.StudentPhoto = ProfilePic;
                             }
@@ -299,12 +299,22 @@ namespace TechnoCraft_School.Controllers
 
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
+        [AjaxMessagesFilter]
         public ActionResult DeleteConfirmed(int id)
         {
-            Students students = db.Students.Find(id);
-            db.Students.Remove(students);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Students.Remove(db.Students.Find(id));
+                db.SaveChanges();
+                this.ShowMessage(MessageType.Success, "Record is added successfully.");
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                this.ShowMessage(MessageType.Error, "Error while deleting record.");
+                return Json(true);
+            }
         }
 
 
