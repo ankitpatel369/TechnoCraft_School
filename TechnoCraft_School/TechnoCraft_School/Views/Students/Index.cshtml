@@ -47,70 +47,69 @@
                 <div class="col-md-3">
                     <br />
                     <button type="submit" class="btn btn-info" style="margin-top:5px;"> <i class="fa fa-search"></i> Search </button>
-                    <label hidden="hidden" id="StoreData">@ViewBag.StoreData</label>
-                </div>
-                <div id="ddlmessage" class="text-danger text-center" style="margin-top:5px;">
-
+                    <input hidden="hidden" type="hidden" value="@ViewBag.StoreData" id="StoreData" />
                 </div>
             }
+            <div id="ddlmessage" class="text-danger text-center" style="margin-top:5px;">
 
+            </div>
         </div>
         <hr />
         <div class="row">
             <div class="col-md-12">
-                    @if (Model != null)
-                    {
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover custom-table-style" id="dtStudents">
-                                <thead>
-                                    <tr style="background-color:#eaeaea;">
-                                        <th> @Html.DisplayName("SR No") </th>
-                                        <th> @Html.DisplayNameFor(model => model.StudentPhoto) </th>
-                                        <th> @Html.DisplayName("Full Name") </th>
-                                        <th> @Html.DisplayNameFor(model => model.EmailAddress) </th>
-                                        <th> @Html.DisplayNameFor(model => model.StudentPhone) </th>
-                                        <th width="150px" style="text-align:center">Action</th>
+                @if (Model != null)
+                {
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover custom-table-style" id="dtStudents">
+                            <thead>
+                                <tr style="background-color:#eaeaea;">
+                                    <th> @Html.DisplayName("SR No") </th>
+                                    <th> @Html.DisplayNameFor(model => model.StudentPhoto) </th>
+                                    <th> @Html.DisplayName("Full Name") </th>
+                                    <th> @Html.DisplayNameFor(model => model.EmailAddress) </th>
+                                    <th> @Html.DisplayNameFor(model => model.StudentPhone) </th>
+                                    <th width="150px" style="text-align:center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span>@i</span>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <img src="@(item.Gender == "Male" ? item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarMale.png" : item.StudentPhoto : item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarFemale.png" : item.StudentPhoto)" height="50" width="50" class="img-circle" />
+                                            </center>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.FirstName) @Html.DisplayFor(model => item.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.EmailAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.StudentPhone)
+                                        </td>
+                                        <td style="text-align:center">
+                                            &nbsp;
+                                            <button class="btn btn-xs btn-primary edit-Student" onclick="location.href='@Url.Action("Edit", "Students", new { id=@item.Students_ID })'">
+                                                <i class="glyphicon glyphicon-edit"></i> Edit
+                                            </button>
+                                            &nbsp;
+                                            <button class="btn btn-xs btn-danger delete-Student" data-id="@item.Students_ID">
+                                                <i class="glyphicon glyphicon-trash"></i> Delete
+                                            </button>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @{int i = 1;}
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <span>@i</span>
-                                            </td>
-                                            <td>
-                                                <center>
-                                                    <img src="@(item.Gender == "Male" ? item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarMale.png" : item.StudentPhoto : item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarFemale.png" : item.StudentPhoto)" height="50" width="50" class="img-circle" />
-                                                </center>
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => item.FirstName) @Html.DisplayFor(model => item.LastName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => item.EmailAddress)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => item.StudentPhone)
-                                            </td>
-                                            <td style="text-align:center">
-                                                &nbsp;
-                                                <button class="btn btn-xs btn-primary edit-Student" onclick="location.href='@Url.Action("Edit", "Students", new { id=@item.Students_ID })'">
-                                                    <i class="glyphicon glyphicon-edit"></i> Edit
-                                                </button>
-                                                &nbsp;
-                                                <button class="btn btn-xs btn-danger delete-Student" data-id="@item.Students_ID">
-                                                    <i class="glyphicon glyphicon-trash"></i> Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        i++;
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    }
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
             </div>
         </div>
     </div><!-- /.box-body -->
@@ -228,6 +227,7 @@
     });
 
     var StudentsTable;
+
     $(document).ready(function () {
         generateDeleteButtonLinks();
 
@@ -296,7 +296,8 @@
 
     function generateDeleteButtonLinks() {
         $('.delete-Student').click(function (event) {
-            // cancel user deletion if confirmation is negative
+
+            // Cancel user deletion if confirmation is negative
             var result = confirm("Do you really want to delete ?");
             if (!result)
                 return;
@@ -319,10 +320,11 @@
     function refreshStudentsTable() {
         $("#loading").show();
         $("#dtStudents tbody tr").remove();
-        var StoreData = $("#StoreData").val();
+
         $.ajax({
             type: 'POST',
-            url: '/Students/Refresh/' + $("#StoreData").val(),
+            url: "/Students/Refresh/",
+            data: { stringID: $("input#StoreData").val() },
             dataType: 'json',
             success: function (data) {
                 var items = '';
@@ -330,14 +332,16 @@
                 StudentsTable.destroy();
                 var j = 1;
                 $.each(data, function (i, item) {
+                    var url = "location.href='/Students/Edit/'" + item.Students_ID;
+                    alert(url);
                     var rows = "<tr>"
-                        + "<td> <span>" + j + "</td> </span>"
-                        + "<td> <center> <img src=" + (item.Gender == "Male" ? item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarMale.png" : item.StudentPhoto : item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarFemale.png" : item.StudentPhoto) + "height='50px' width='50px' class='img-circle' /> </center> </td>"
+                        + "<td> <span>" + j + "</span> </td>"
+                        + "<td> <center> <img src=" + (item.Gender == "Male" ? item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarMale.png" : item.StudentPhoto : item.StudentPhoto == "" ? "/Content/StudentPhotos/AvatarFemale.png" : item.StudentPhoto) + " height='50px' width='50px' class='img-circle' /> </center> </td>"
                         + "<td>" + item.FirstName + " " + item.LastName + "</td>"
                         + "<td>" + item.EmailAddress + "</td>"
                         + "<td>" + item.StudentPhone + "</td>"
-                        + "<td style='text-align:center'> <button class='btn btn-xs btn-primary edit-Department' onclick='location.href='/Students/Edit/" + item.Students_ID + "''><i class='glyphicon glyphicon-edit'></i> Edit</button>&nbsp;&nbsp;"
-                        + "<button class='btn btn-xs btn-danger delete-Department' data-id='" + item.Students_ID + "'><i class='glyphicon glyphicon-trash'></i> Delete</button>&nbsp;&nbsp;"
+                        + "<td style='text-align:center'> <button class='btn btn-xs btn-primary edit-Student' onclick='"+ url +" '><i class='glyphicon glyphicon-edit'></i> Edit</button>&nbsp;&nbsp;"
+                        + "<button class='btn btn-xs btn-danger delete-Student' data-id='" + item.Students_ID + "'><i class='glyphicon glyphicon-trash'></i> Delete</button>&nbsp;&nbsp;"
                         + "</td>"
                         + "</tr>";
                     $('#dtStudents tbody').append(rows);
@@ -351,6 +355,7 @@
                 alert("Message: " + r.Message);
             }
         });
+
         $("#loading").hide();
     }
 

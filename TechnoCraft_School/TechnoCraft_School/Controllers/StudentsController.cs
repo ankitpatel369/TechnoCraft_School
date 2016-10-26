@@ -91,7 +91,8 @@ namespace TechnoCraft_School.Controllers
         {
             try
             {
-                ViewBag.StoreData = Course_ID + ',' + Standard_ID + ',' + Class_ID;
+                ViewBag.StoreData = Course_ID + "," + Standard_ID + "," + Class_ID;
+
                 return View(db.Students.Where(s => s.Course_ID == Course_ID).Where(s => s.Standard_ID == Standard_ID).Where(s => s.Class_ID == Class_ID).ToList());
             }
             catch (Exception ex)
@@ -101,13 +102,27 @@ namespace TechnoCraft_School.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Refresh(string StoreData)
+        [HttpPost]
+        [AjaxMessagesFilter]
+        public ActionResult Refresh(string stringID)
         {
-            string[] Ids = StoreData.Split(',');
-            var StudentList = db.Students.Where(s => s.Course_ID == Convert.ToInt32(Ids[0])).Where(s => s.Standard_ID == Convert.ToInt32(Ids[1])).Where(s => s.Class_ID == Convert.ToInt32(Ids[2])).ToList();
-            return Json(true, JsonRequestBehavior.AllowGet);
+            try
+            {
+                string[] Ids = stringID.Split(',');
+                //int[] myInts = Array.ConvertAll(Ids, int.Parse);
+                int Course_ID = Convert.ToInt32(Ids[0]);
+                int Standard_ID = Convert.ToInt32(Ids[1]);
+                int Class_ID = Convert.ToInt32(Ids[2]);
+                var StudentList = db.Students.Where(s => s.Course_ID == Course_ID).Where(s => s.Standard_ID == Standard_ID).Where(s => s.Class_ID == Class_ID).ToList();
+                return Json(StudentList,JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageType.Error, ex.Message, false, true);
+                return Json(true);
+            }
         }
+
         // GET: Students/Details/5
         public ActionResult Details(int? id)
         {
@@ -307,17 +322,15 @@ namespace TechnoCraft_School.Controllers
                 db.Students.Remove(db.Students.Find(id));
                 db.SaveChanges();
                 this.ShowMessage(MessageType.Success, "Record is added successfully.");
-                return Json(true);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
                 this.ShowMessage(MessageType.Error, "Error while deleting record.");
-                return Json(true);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
         }
-
-
 
         protected override void Dispose(bool disposing)
         {
