@@ -171,6 +171,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('input[type="date"]').attr('type', 'text');
+
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 100) {
                     $('#scroll').fadeIn();
@@ -213,11 +215,6 @@
             format: 'dd-mm-yyyy',
             autoclose: true,
         });
-        // Datepicker for only year
-        $('.year').datepicker({
-            autoclose: true,
-        });
-
 
         function menustyle() {
             setCookie("menu-style", document.body.getAttribute('class').split(' ')[document.body.getAttribute('class').split(' ').length - 1], 365);

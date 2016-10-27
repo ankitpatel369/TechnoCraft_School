@@ -1,26 +1,27 @@
-﻿@model IEnumerable<TechnoCraftSchool_Model.Subject>
+﻿@model IEnumerable<TechnoCraftSchool_Model.SubjectAssign>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 @section Header{
     <h1>
-        <button type="button" class="btn btn-primary" id="Add-Subject"> <i class="fa fa-plus"></i> Add New Subject</button>
+        <button type="button" class="btn btn-primary" id="Assign-Subject"> <i class="fa fa-plus"></i> Assign New Subject</button>
 
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="@Url.Action("Index", "Subject")"><i class=" fa fa-dashboard"></i> Home </a></li>
-        <li class="active">Subjects</li>
+        <li><a href="@Url.Action("Index", "SubjectAssign")"><i class=" fa fa-dashboard"></i> Home </a></li>
+        <li class="active">Subject Assign</li>
     </ol>
 }
 
 <div class="box box-solid box-primary">
     <div class="box-header with-border">
         <h2 class="box-title">
-            Subjects
+            Subject Assigns
         </h2>
         <div class="box-tools">
         </div>
@@ -32,11 +33,13 @@
                 @if (Model != null)
                 {
                     <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover custom-table-style" id="dtSubject">
+                        <table class="table table-hover custom-table-style" id="dtSubjectAssign">
                             <thead>
                                 <tr>
                                     <th> @Html.DisplayName("SR No") </th>
-                                    <th> @Html.DisplayNameFor(model => model.SubjectName) </th>
+                                    <th>@Html.DisplayNameFor(model => model.Subjects.SubjectName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Course_ID)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Standard_ID)</th>
                                     <th width="100px" style="text-align:center">Action</th>
                                 </tr>
                             </thead>
@@ -49,18 +52,21 @@
                                             <span>@i</span>
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(model => item.SubjectName)
+                                            @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Course_ID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Standard_ID)
                                         </td>
                                         <td style="text-align:center">
                                             &nbsp;
-                                            <a href="#" class="edit-Subject" data-toggle="tooltip" title="Edit" class="edit-Subject" data-placement="top" data-id="@item.Subject_ID">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </a>
-                                            @*<a href="@Url.Action("Edit", "Subject", new { id = item.Subject_ID })" data-toggle="tooltip" title="Edit" data-placement="top"><i class="glyphicon glyphicon-edit"></i> </a>*@
+                                            <a href="#" class="edit-assign-subject" data-toggle="tooltip" title="Edit" data-placement="top" data-id="@item.Subjectassign_ID"><i class="glyphicon glyphicon-edit"></i></a>
                                             &nbsp;
-                                            <a href="@Url.Action("Details", "Subject", new { id = item.Subject_ID })" data-toggle="tooltip" title="Details" data-placement="top"><i class="glyphicon glyphicon-list"></i> </a>
+                                            <a href="#" class="detail-assign-subject" data-toggle="tooltip" title="Details" data-placement="top" data-id="@item.Subjectassign_ID"><i class="glyphicon glyphicon-list"></i> </a>
                                             &nbsp;
-                                            <a href="#" class="delete-Subject" data-toggle="tooltip" title="Delete" data-placement="top" data-id="@item.Subject_ID"><i class="glyphicon glyphicon-trash"></i> </a>
+                                            <a href="#" class="del-assign-subject" data-toggle="tooltip" title="Delete" data-placement="top" data-id="@item.Subjectassign_ID"><i class="glyphicon glyphicon-trash"></i> </a>
                                         </td>
                                     </tr>
                                     i++;
@@ -81,26 +87,27 @@
     </div>
 </div>
 
-<div class="modal fade" id="EditSubject">
+<div class="modal fade" id="EditAssignSubject">
 </div>
-
-<div class="modal fade" id="AddSubject">
+<div class="modal fade" id="DetailAssignSubject">
+</div>
+<div class="modal fade" id="AddAssignSubject">
 </div>
 
 <script>
-    $("#dtSubject tbody tr").on('click', function (event) {
-        $("#dtSubject tbody tr").removeClass('row_selected');
+    $("#dtSubjectAssign tbody tr").on('click', function (event) {
+        $("#dtSubjectAssign tbody tr").removeClass('row_selected');
         $(this).addClass('row_selected');
     });
 
-    var SubjectTable;
+    var AssignTable;
 
     $(document).ready(function () {
         generateDeleteButtonLinks();
 
-        $('#Add-Subject').click(function () {
-            var modal = $('#AddSubject').modal();
-            modal.load("@Url.Action("AddSubject")");
+        $('#Assign-Subject').click(function () {
+            var modal = $('#AddAssignSubject').modal();
+            modal.load("@Url.Action("Create")");
         });
 
         var handleDataTableButtons = function () {
@@ -120,8 +127,8 @@
     });
 
     function drawDatatable() {
-        if ($("#dtSubject").length) {
-            SubjectTable = $("#dtSubject").DataTable({
+        if ($("#dtSubjectAssign").length) {
+            AssignTable = $("#dtSubjectAssign").DataTable({
                 dom: "Bfrtip",
                 columnDefs: [
                     { "orderable": false, "targets": 2 }
@@ -131,34 +138,34 @@
                       extend: "copy",
                       className: "btn-sm",
                       exportOptions: {
-                          columns: [0, 1]
+                          columns: [0, 1, 2]
                       },
-                      title: "Subject"
+                      title: "Subject Assign"
 
                   },
                   {
                       extend: "excel",
                       className: "btn-sm",
                       exportOptions: {
-                          columns: [0, 1]
+                          columns: [0, 1, 2]
                       },
-                      title: "Subject"
+                      title: "Subject Assign"
                   },
                   {
                       extend: "pdfHtml5",
                       className: "btn-sm",
                       exportOptions: {
-                          columns: [0, 1]
+                          columns: [0, 1, 2]
                       },
-                      title: "Subject"
+                      title: "Subject Assign"
                   },
                   {
                       extend: "print",
                       className: "btn-sm",
                       exportOptions: {
-                          columns: [0, 1]
+                          columns: [0, 1, 2]
                       },
-                      title: "Subject"
+                      title: "Subject Assign"
                   },
                 ],
                 responsive: true
@@ -168,19 +175,25 @@
 
     function generateDeleteButtonLinks() {
 
-        $('.edit-Subject').click(function () {
+        $('.edit-assign-subject').click(function () {
             var id = $(this).attr('data-id');
-            var modal = $('#EditSubject').modal();
-            modal.load('/Subject/EditSubject/' + id);
+            var modal = $('#EditAssignSubject').modal();
+            modal.load('/SubjectAssign/Edit/' + id);
         });
 
-        $('.delete-Subject').click(function (event) {
+        $('.detail-assign-subject').click(function () {
+            var id = $(this).attr('data-id');
+            var modal = $('#DetailAssignSubject').modal();
+            modal.load('/SubjectAssign/Details/' + id);
+        });
+
+        $('.del-assign-subject').click(function (event) {
 
             // Cancel user deletion if confirmation is negative
             var result = confirm("Do you really want to delete ?");
             if (!result)
                 return;
-            var url = "/Subject/Delete";
+            var url = "/SubjectAssign/Delete";
             var id = $(this).attr('data-id');
             $.ajax({
                 url: url + '/' + id,
@@ -188,7 +201,7 @@
                 cache: false,
                 dataType: "json",
                 success: function (response) {
-                    refreshSubjectTable();
+                    refreshAssignTable();
                 },
                 error: function (xhr) { }
             });
@@ -196,30 +209,32 @@
         });
     }
 
-    function refreshSubjectTable() {
+    function refreshAssignTable() {
         $("#loading").show();
-        $("#dtSubject tbody tr").remove();
+        $("#dtSubjectAssign tbody tr").remove();
 
         $.ajax({
             type: 'POST',
-            url: "/Subject/Refresh/",
+            url: "/SubjectAssign/Refresh/",
             dataType: 'json',
             success: function (data) {
                 var items = '';
-                SubjectTable.clear();
-                SubjectTable.destroy();
+                AssignTable.clear();
+                AssignTable.destroy();
                 var j = 1;
                 $.each(data, function (i, item) {
                     var rows = "<tr>"
                         + "<td> <span>" + j + "</span> </td>"
-                        + "<td>" + item.SubjectName + "</td>"
+                        + "<td>" + item.Subjects.SubjectName + "</td>"
+                        + "<td>" + item.Course_ID + "</td>"
+                        + "<td>" + item.Standard_ID + "</td>"
                         + "<td style='text-align:center'>"
-                        + " <a href='#' class='edit-Subject' data-toggle='tooltip' title='Edit' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-edit'></i> </a>"
-                        + " <a href='#' data-toggle='tooltip' title='Details' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-list'></i> </a>"
-                        + " <a href='#' class='delete-Subject' data-toggle='tooltip' title='Delete' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-trash'></i> </a>"
+                        + " <a href='#' class='edit-assign-subject' data-toggle='tooltip' title='Edit' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-edit'></i> </a>"
+                        + " <a href='#' class='detail-assign-subject' data-toggle='tooltip' title='Details' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-list'></i> </a>"
+                        + " <a href='#' class='del-assign-subject' data-toggle='tooltip' title='Delete' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-trash'></i> </a>"
                         + "</td>"
                         + "</tr>";
-                    $('#dtSubject tbody').append(rows);
+                    $('#dtSubjectAssign tbody').append(rows);
                     j++;
                 });
                 generateDeleteButtonLinks();
@@ -235,11 +250,11 @@
     }
 
     var ajaxSuccess = function (response) {
-        if (response)
-        {
-            $('#AddSubject').modal('hide');
-            $('#EditSubject').modal('hide');
-            refreshSubjectTable();
+        if (response) {
+            $('#AddAssignSubject').modal('hide');
+            $('#EditAssignSubject').modal('hide');
+            $('#DetailAssignSubject').modal('hide');
+            refreshAssignTable();
         }
     }
     var ajaxFailure = function (xhr, status) {
@@ -247,3 +262,4 @@
     }
 
 </script>
+

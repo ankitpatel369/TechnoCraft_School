@@ -175,6 +175,7 @@
     <Compile Include="Controllers\RolesManagerController.cs" />
     <Compile Include="Controllers\StandardController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\SubjectAssignController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1178,11 +1179,13 @@
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Subject\_AddSubject.cshtml" />
-    <Content Include="Views\Subject\Delete.cshtml" />
     <Content Include="Views\Subject\Details.cshtml" />
-    <Content Include="Views\Subject\Edit.cshtml" />
     <Content Include="Views\Subject\Index.cshtml" />
     <Content Include="Views\Subject\_EditSubject.cshtml" />
+    <Content Include="Views\SubjectAssign\_AssignSubject.cshtml" />
+    <Content Include="Views\SubjectAssign\_Details.cshtml" />
+    <Content Include="Views\SubjectAssign\_EditAssignSubject.cshtml" />
+    <Content Include="Views\SubjectAssign\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

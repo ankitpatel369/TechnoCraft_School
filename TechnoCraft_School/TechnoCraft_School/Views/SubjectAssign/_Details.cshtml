@@ -1,0 +1,43 @@
+﻿@model TechnoCraftSchool_Model.SubjectAssign
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SubjectAssign</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subjects.SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subjects.SubjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Standard_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Standard_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Subjectassign_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

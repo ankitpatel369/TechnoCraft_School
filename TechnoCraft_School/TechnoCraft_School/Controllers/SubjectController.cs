@@ -15,6 +15,8 @@ namespace TechnoCraft_School.Controllers
     [Authorize]
     public class SubjectController : ControllerBase
     {
+        #region Subject
+
         #region Get Subject
         // GET: Subject
         public ActionResult Index()
@@ -22,6 +24,7 @@ namespace TechnoCraft_School.Controllers
             return View(db.Subjects.ToList());
         }
 
+        [HttpPost]
         public ActionResult Refresh()
         {
             return Json(db.Subjects, JsonRequestBehavior.AllowGet);
@@ -126,15 +129,17 @@ namespace TechnoCraft_School.Controllers
         #region Subject Delete
         // POST: Subject/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [AjaxMessagesFilter]
         public ActionResult DeleteConfirmed(int id)
         {
             Subject subject = db.Subjects.Find(id);
             db.Subjects.Remove(subject);
             db.SaveChanges();
-            this.ShowMessage(MessageType.Success, "Subject Remove Succefully.", true);
-            return RedirectToAction("Index");
+            this.ShowMessage(MessageType.Success, "Subject Remove Succefully.", false, true);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
+        #endregion 
+
         #endregion
 
         protected override void Dispose(bool disposing)
