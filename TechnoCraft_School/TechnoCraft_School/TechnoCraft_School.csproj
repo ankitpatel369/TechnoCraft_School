@@ -175,6 +175,7 @@
     <Compile Include="Controllers\RolesManagerController.cs" />
     <Compile Include="Controllers\StandardController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +214,18 @@
     <Compile Include="Migrations\201610240748160_UpdateStudentTable1.cs" />
     <Compile Include="Migrations\201610240748160_UpdateStudentTable1.Designer.cs">
       <DependentUpon>201610240748160_UpdateStudentTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610270336226_123.cs" />
+    <Compile Include="Migrations\201610270336226_123.Designer.cs">
+      <DependentUpon>201610270336226_123.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610270454057_Subjects.cs" />
+    <Compile Include="Migrations\201610270454057_Subjects.Designer.cs">
+      <DependentUpon>201610270454057_Subjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610270504392_UserRoles.cs" />
+    <Compile Include="Migrations\201610270504392_UserRoles.Designer.cs">
+      <DependentUpon>201610270504392_UserRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelBinders\DynamicJsonModelBinder.cs" />
@@ -1120,11 +1133,7 @@
     <Content Include="Views\Shared\_AdminTopMenu.cshtml" />
     <Content Include="Views\Shared\_BlankPage.cshtml" />
     <Content Include="Views\Shared\_Notification.cshtml" />
-    <Content Include="Views\RolesManager\Create.cshtml" />
-    <Content Include="Views\RolesManager\Edit.cshtml" />
     <Content Include="Views\RolesManager\Index.cshtml" />
-    <Content Include="Views\RolesManager\ManageUserRoles.cshtml" />
-    <Content Include="Views\RolesManager\UserInfo.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
@@ -1168,6 +1177,12 @@
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Subject\_AddSubject.cshtml" />
+    <Content Include="Views\Subject\Delete.cshtml" />
+    <Content Include="Views\Subject\Details.cshtml" />
+    <Content Include="Views\Subject\Edit.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Subject\_EditSubject.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -1203,6 +1218,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610240748160_UpdateStudentTable1.resx">
       <DependentUpon>201610240748160_UpdateStudentTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610270336226_123.resx">
+      <DependentUpon>201610270336226_123.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610270454057_Subjects.resx">
+      <DependentUpon>201610270454057_Subjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610270504392_UserRoles.resx">
+      <DependentUpon>201610270504392_UserRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

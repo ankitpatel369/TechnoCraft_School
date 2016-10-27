@@ -1,0 +1,43 @@
+﻿@model TechnoCraftSchool_Model.Subject
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<section class="content">
+    @section Header{
+        <h1>Subject Management</h1>
+        <small></small>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Subject")"><i class=" fa fa-dashboard"></i> Home </a></li>
+            <li class="active">Subjects</li>
+        </ol>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Details Subject</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SubjectName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SubjectName)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="box-footer">
+                    <button type="button" class="btn btn-primary" onclick='@Url.Action("Edit", "Subject", new { id=@Model.Subject_ID})'> <i class="glyphicon glyphicon-edit"></i> Edit </button>
+                    <button type="button" class="btn btn-warning" onclick='@Url.Action("Index", "Subject")'> <i class="glyphicon glyphicon-fast-backward"></i> Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

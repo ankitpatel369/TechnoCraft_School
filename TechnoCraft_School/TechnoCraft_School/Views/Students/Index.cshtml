@@ -28,32 +28,41 @@
             @using (Html.BeginForm("Index", "Students", FormMethod.Post))
             {
                 <div class="col-md-3">
-                    <label>Select Course</label>
-                    @Html.Display("Select Course")
-                    @Html.DropDownList("Course_ID", null, new { @class = "form-control hide-search", @style = "width:100%" })
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        @Html.Display("Select Course")
+                        @Html.DropDownList("Course_ID", null, new { @class = "form-control hide-search", @style = "width:100%" })
+                    </div>
+                 </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Select Standard</label>
+                        <select id="Standard_ID" name="Standard_ID" class="form-control hide-search" style="width:100%">
+                            <option value="0"> -- Select Standard -- </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Select Standard</label>
-                    <select id="Standard_ID" name="Standard_ID" class="form-control hide-search" style="width:100%">
-                        <option value="0"> -- Select Standard -- </option>
-                    </select>
+                    <div class="form-group">
+                        <label>Select Class</label>
+                        <select id="Class_ID" name="Class_ID" class="form-control hide-search" style="width:100%">
+                            <option value="0"> -- Select Class -- </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Select Class</label>
-                    <select id="Class_ID" name="Class_ID" class="form-control hide-search" style="width:100%">
-                        <option value="0"> -- Select Class -- </option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <br />
-                    <button type="submit" class="btn btn-info" style="margin-top:5px;"> <i class="fa fa-search"></i> Search </button>
-                    <input hidden="hidden" type="hidden" value="@ViewBag.StoreData" id="StoreData" />
+                    <div class="form-group">
+                        <br />
+                        <button type="submit" class="btn btn-info" style="margin-top:5px;"> <i class="fa fa-search"></i> Search </button>
+                        <input hidden="hidden" type="hidden" value="@ViewBag.StoreData" id="StoreData" />
+                    </div>
                 </div>
             }
             <div id="ddlmessage" class="text-danger text-center" style="margin-top:5px;">
 
             </div>
         </div>
+
         <hr />
         <div class="row">
             <div class="col-md-12">
@@ -205,18 +214,6 @@
                     }
                 }
             });
-        });
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) {
-                $('#scroll').fadeIn();
-            } else {
-                $('#scroll').fadeOut();
-            }
-        });
-        $('#scroll').click(function () {
-            $("html, body").animate({ scrollTop: 0 }, 1000);
-            return false;
         });
     });
 

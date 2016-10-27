@@ -53,11 +53,25 @@ namespace TechnoCraft_School.Models
         public DbSet<Admissions> Admissions { get; set; }
         public DbSet<Admission_Additional_Info> Admission_Additional_Infos { get; set; }
 
+        /* Subject models*/
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<SubjectAssign> SubjectAssigns { get; set; }
+        public DbSet<SubjectAllocation> SubjectAllocations { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // Application Master Tables
+            //modelBuilder.Entity<IdentityUser>().ToTable("Users", "dbo");
+            //modelBuilder.Entity<IdentityRole>().ToTable("Roles", "dbo");
+            modelBuilder.Entity<IdentityUser>().ToTable("Users","dbo");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles","dbo");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles","dbo");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims","dbo");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins","dbo");
+            
             modelBuilder.Entity<Institute>().ToTable("Institution", "dbo");
             modelBuilder.Entity<AcademicYear>().ToTable("AcademicYears", "dbo");
 
@@ -67,11 +81,15 @@ namespace TechnoCraft_School.Models
             modelBuilder.Entity<Class>().ToTable("Classes", "dbo");
             modelBuilder.Entity<Students>().ToTable("Students", "dbo");
 
+            // Subject
+            modelBuilder.Entity<Subject>().ToTable("Subjects", "dbo");
+            modelBuilder.Entity<SubjectAssign>().ToTable("SubjectAssign", "dbo");
+            modelBuilder.Entity<SubjectAllocation>().ToTable("SubjectAllocation", "dbo");
+
+
             modelBuilder.Entity<Admissions>().ToTable("Admissions", "dbo");
             modelBuilder.Entity<Admission_Additional_Info>().ToTable("Admission_Additional_Info", "dbo");
 
-            modelBuilder.Entity<IdentityUser>().ToTable("Users", "dbo");
-            modelBuilder.Entity<IdentityRole>().ToTable("Roles", "dbo");
 
             //Course -> Standard one to many relation
             modelBuilder.Entity<Course>().HasMany(c => c.Standards).WithRequired(c => c.Course);//.WillCascadeOnDelete();

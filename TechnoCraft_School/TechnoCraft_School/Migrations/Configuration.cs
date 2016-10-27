@@ -6,8 +6,9 @@ namespace TechnoCraft_School.Migrations
     using System.Data.Entity.Validation;
     using System.Diagnostics;
     using System.Linq;
+    using TechnoCraft_School.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TechnoCraft_School.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -18,21 +19,26 @@ namespace TechnoCraft_School.Migrations
         {
             try
             {
-                //context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                //{
-                //    Name = "Global Admin"
-                //});
+                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                {
+                    Name = "Global Admin"
+                });
 
-                //context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                //{
-                //    Name = "Agent"
-                //});
+                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                {
+                    Name = "Admin"
+                });
+                
+                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                {
+                    Name = "Faculty"
+                });
 
-                //context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                //{
-                //    Name = "User"
-                //});
-                //context.SaveChanges();
+                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                {
+                    Name = "Student"
+                });
+                context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {

@@ -54,8 +54,9 @@
                     <li>
                         <a href="#"><i class="fa fa-book"></i> Subject <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Subjects </a></li>
+                            <li><a href="@Url.Action("Index", "Subject")"><i class="fa fa-circle-o"></i> Subjects List </a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Assign Subjects </a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Subjects </a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Subject Allocation </a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Elective Subject </a></li>
                         </ul>
@@ -98,17 +99,20 @@
                 </ul>
             </li>
 
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-sitemap"></i>
-                    <span> Roles Management </span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="@Url.Action("Index", "RolesManager")"><i class="fa fa-plus-square"></i> Create New Role </a></li>
-                    <li><a href="@Url.Action("ManageUserRoles", "RolesManager")"><i class="fa fa-user"></i> Manage User Role </a></li>
-                </ul>
-            </li>
+            @if (User.IsInRole("Global Admin"))
+            {
+                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "RolesManager" ? "active treeview" : "treeview")">
+                    <a href="@Url.Action("Index", "RolesManager")">
+                        <i class="fa fa-sitemap"></i> <span>Roles Management</span>
+                    </a>
+                </li>
+
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "ManageUsers" ? "active treeview" : "treeview")">
+                    <a href="@Url.Action("ManageUsers", "Account")">
+                        <i class="fa fa-users"></i> <span>User Manager</span>
+                    </a>
+                </li>
+            }
 
             <li class="treeview">
                 <a href="#">

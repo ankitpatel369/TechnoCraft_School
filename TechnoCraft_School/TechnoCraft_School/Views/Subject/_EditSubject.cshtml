@@ -1,0 +1,49 @@
+﻿@model TechnoCraftSchool_Model.Subject
+
+
+<div class="modal-dialog">
+    <div class="modal-content" style="border-radius:5px;">
+        <div class="modal-header bg-light-blue-gradient" style="border-top-radius:5px;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"> Add New Subject </h4>
+        </div>
+
+        <div class="modal-body" id="Edit_Subject">
+
+            <div id="modalErrorMessage">
+            </div>
+
+            @using (Ajax.BeginForm("EditSubject", "Subject", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "modalErrorMessage",
+                    OnSuccess = "ajaxSuccess",
+                    OnFailure = "ajaxFailure"
+                }))
+            {
+                <form role="form">
+                    <div class="box-body">
+                        @Html.ValidationSummary()
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Subject_ID)
+
+                    <div class="col-xs-6">
+                        @Html.LabelFor(model => model.SubjectName)
+                        @Html.EditorFor(model => model.SubjectName, new { htmlAttributes = new { @class = "form-control", placeholder = "Subject Name" } })
+                        @Html.ValidationMessageFor(model => model.SubjectName, "", new { @class = "text-danger" })
+                    </div>
+                </div><!-- /.box-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="post"> Edit </button>
+                </div>
+            </form>
+            }
+        </div>
+    </div><!-- /.modal-content -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

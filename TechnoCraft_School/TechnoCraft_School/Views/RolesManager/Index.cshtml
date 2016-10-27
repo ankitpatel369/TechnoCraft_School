@@ -1,155 +1,286 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 @{
-    ViewBag.Title = "Role Manager";
+    ViewBag.Title = "Roles Manager";
+}
+
+@section Header{
+    <h1>
+
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class=" fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Roles Management</li>
+    </ol>
 }
 <div class="row">
-    <!-- Left col -->
-    <div class="col-md-5">
+    <div class="col-md-6">
 
-        <div class="box box-default">
+        <div class="box box-solid box-primary ">
+
             <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa  fa-tasks"></i> &nbsp;&nbsp; Roles Listing</h3>
-
+                <h3 class="box-title"><i class="fa fa-sitemap"></i>&nbsp;Roles</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div style="display: block;" class="box-body">
-                <div class="table-responsive">
-                    <table class="table no-margin">
-                        <thead>
-                            <tr class="bg-black-gradient">
-                                <th>Role Name</th>
-                                <th class="text-center">Action</th>
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+
+            <div class="box-body">
+                <table class="table table-responsive custom-table-style">
+                    <thead>
+                        <tr>
+                            <th> Roles </th>
+                            <th width="130px" style="text-align:center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var role in Model)
+                        {
+                            <tr>
+                                <td>@role.Name</td>
+                                <td style="text-align:center">
+                                    <button class="btn btn-xs btn-danger delete-Role" data-id="@role.Name">
+                                        <i class="glyphicon glyphicon-trash"></i> Delete
+                                    </button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
+                        }
+                    </tbody>
+                </table>
 
-                            @foreach (var role in Model)
-                            {
-                                <tr>
-                                    <td class="col-md-4">@role.Name</td>
-                                    <td class="col-md-2">
-                                        &nbsp;
+            </div><!-- /.box-body -->
 
-                                        @*@Html.ActionLink("Edit", "Edit", new { roleName = @role.Name }) |*@
+            <div class="box-footer">
+                <form action="#" method="post">
+                    <div class="input-group">
+                        <a data-toggle="modal" data-target="#create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create New Role</a>
+                    </div>
+                </form>
+            </div><!-- /.box-footer-->
 
-                                        <a data-toggle="modal" data-target="#@string.Concat(role.Name,"edit")" class="btn btn-default btn-sm btn-flat">Edit</a>
-                                        <!-- Modal -->
-                                        <div id="@string.Concat(role.Name,"edit")" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-light-blue-gradient">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h4 class="modal-title"> Edit Role</h4>
-                                                    </div>
+        </div><!-- /.box -->
 
-                                                    @using (Html.BeginForm("Edit", "RolesManager", FormMethod.Post))
-                                                    {
-                                                        <div class="modal-body">
-                                                            @Html.AntiForgeryToken()
-                                                            @Html.ValidationSummary(true)
+    </div>
 
-                                                            <input type="hidden" value="@role.Id" name="Id" />
+    <div class="col-md-6">
 
-                                                            <div class="form-group">
-                                                                <label for="inputEmail3" class="col-sm-3 control-label">Role name</label>
-                                                                <div class="col-sm-6">
-                                                                    <input type="text" value="@role.Name" name="RoleName" class="form-control" placeholder="Role Name" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "RolesManager")'">Save</button>
-                                                        </div>
-                                                    }
+        <div class="box box-solid box-primary">
+
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-user  "></i>&nbsp;Manage User Roles</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+
+            <div class="box-body">
 
 
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                        </div>
-
-                                        &nbsp;
-
-                                        @*<span onclick="return confirm('Are you sure to delete?')"><a href="/RolesManager/Delete?RoleName=@role.Name" class="delLink">Delete</a></span>*@
-                                        <a data-toggle="modal" data-target="#@string.Concat(role.Name,"delete")" class="btn btn-default btn-sm btn-flat">Delete</a>
-                                        <!-- Modal -->
-                                        <div id="@string.Concat(role.Name,"delete")" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-yellow-gradient">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h3 class="modal-title"> Are you sure ?</h3>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                       <h4>Are you sure to delete <b>@role.Name</b> role ?</h4>
-                                                    </div>
-                                                    <br>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "RolesManager", new { RoleName = @role.Name })'">Delete</button>
-                                                    </div>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                        </div>
-
-
-                                    </td>
-
-                                </tr>
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.table-responsive -->
-            </div>
-            <div style="display: block;" class="box-footer clearfix">
-
-                <a data-toggle="modal" data-target="#create" class="btn btn-primary bg-light-blue-gradient btn-sm  pull-right"><span class="glyphicon glyphicon-plus"></span> Create New Role</a>
-                <!-- Modal -->
-                <div id="create" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-light-blue-gradient">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Create New Role</h4>
-                            </div>
-                            @using (Html.BeginForm("Create", "RolesManager", FormMethod.Post))
-                            {
-                                <div class="modal-body">
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true)
-
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-3 control-label">Role name</label>
-                                        <div class="col-sm-6">
-                                            @Html.TextBox("RoleName", null, new { @class = "form-control", @placeholder = "Role Name" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-default">Save changes</button>
-                                </div>
-                            }
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
+                <div class="form-group">
+                    <label style="display:block">Select User</label>
+                    @Html.DropDownList("comboboxUsers", null, new { @class = "select2 form-control", @style = "width:100%" })
                 </div>
 
-            </div>
-        </div>
-        <!-- /.box -->
+
+
+
+
+
+
+                <!-- /.form-group -->
+                <div id="tableSection"></div>
+
+
+
+
+
+
+            </div><!-- /.box-body -->
+
+            <div class="box-footer">
+                <input type="button" class="btn btn-primary" value="View Roles of User" onclick="GetRole()" />
+                <input type="button" data-toggle="modal" data-target="#addRoleToUser" class="btn btn-primary" value="Add Roles To User" />
+            </div><!-- /.box-footer-->
+
+        </div><!-- /.box -->
+
     </div>
 
 </div>
+
+<!-- Modal -->
+<div id="create" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light-blue-gradient">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Create New Role</h4>
+            </div>
+            @using (Html.BeginForm("Create", "RolesManager", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Role name</label>
+                        <div class="col-sm-12">
+                            @Html.TextBox("RoleName", null, new { @class = "form-control", @placeholder = "Role Name" })
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-default">Save changes</button>
+                </div>
+            }
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<div id="addRoleToUser" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light-blue-gradient">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add New Role To User</h4>
+            </div>
+
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">Role</label>
+                    <div class="col-sm-12">
+                        @Html.DropDownList("comboboxRoles", null, new { @class = "select2 form-control", @style = "width:100%" })
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="button" class="btn btn-primary" value="Add Role To User" onclick="AddRole()" />
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<script>
+
+    $('.delete-Role').click(function (event) {
+        // cancel user deletion if confirmation is negative
+        var result = confirm("Do you really want to delete ?");
+        if (!result)
+            return;
+        $.ajax({
+                  url: "/RolesManager/Delete/",
+                  data: { RoleName: $(this).attr('data-id') },
+                  type: 'POST',
+                  cache: false,
+                  dataType: "json",
+                  success: function (response) {
+                      location.reload();
+                  },
+                  error: function (xhr) {
+                  }
+              });
+        event.preventDefault();
+    });
+
+    $(document).ready(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+    });
+
+    function GetRole() {
+        $("#tableSection table").remove();
+        $.ajax(
+             {
+                 url: "/RolesManager/GetUserRoles/",
+                 data: { userName: $('#comboboxUsers').val() },
+                 type: 'POST',
+                 cache: false,
+                 dataType: "json",
+                 success: function (response) {
+                     if (response != null) {
+
+                         if (response.length > 0) {
+
+
+                             var header = "<table class='table table-responsive custom-table-style' id='dtUserRoles'>"
+                                     + "<thead><tr><th> Roles </th><th width='130px' style='text-align:center'>Action</th></tr></thead><tbody></tbody></table>"
+
+                             $('#tableSection').append(header);
+
+                             for (var i = 0; i < response.length; i++) {
+
+                                 var rows = "<tr>"
+                     + "<td>" + response[i] + "</td>"
+                     + "<td style='text-align:center'>"
+                     + "<button class='btn btn-xs btn-danger delete-user-role' data-id='" + response[i] + "'><i class='glyphicon glyphicon-trash'></i> Delete</button>&nbsp;&nbsp;"
+                     + "</td>"
+                     + "</tr>";
+
+                                 $('#dtUserRoles tbody').append(rows);
+                             }
+                         }
+                         else {
+                             $("#tableSection table").remove();
+                             var header = "<table class='table table-responsive custom-table-style' id='dtUserRoles'>"
+                                    + "<thead><tr><th> Roles </th></tr></thead><tbody><tr><td>No roles added yet. Please add role.</td></tr></tbody></table>"
+                             $('#tableSection').append(header);
+                         }
+
+                     }
+                     generateDeleteUserLink();
+                 },
+                 error: function (xhr) {
+                 }
+             });
+    }
+
+    function AddRole() {
+        $.ajax({
+            url: "/RolesManager/AddUserRoles/",
+            data: { userName: $('#comboboxUsers').val(), roleName: $("[name='comboboxRoles'] option:selected").text() },
+            type: 'POST',
+            cache: false,
+            dataType: "json",
+            success: function (response) {
+                $('#addRoleToUser').modal('hide');
+                GetRole();
+            },
+            error: function (xhr) { }
+        });
+    }
+
+    function generateDeleteUserLink() {
+        $('.delete-user-role').click(function (event) {
+            // cancel user deletion if confirmation is negative
+            var result = confirm("Do you really want to delete ?");
+            if (!result)
+                return;
+            $.ajax({
+                url: "/RolesManager/DeleteUserRoles/",
+                data: { userName: $('#comboboxUsers').val(), rolename: $(this).attr('data-id') },
+                type: 'POST',
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    GetRole();
+                },
+                error: function (xhr) {
+                }
+            });
+            event.preventDefault();
+        });
+    }
+
+</script>
+
+
 
 

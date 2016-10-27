@@ -1,0 +1,251 @@
+﻿@model IEnumerable<TechnoCraftSchool_Model.Subject>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Header{
+    <h1>
+        <button type="button" class="btn btn-primary" id="Add-Subject"> <i class="fa fa-plus"></i> Add New Subject</button>
+
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Subject")"><i class=" fa fa-dashboard"></i> Home </a></li>
+        <li class="active">Subjects</li>
+    </ol>
+}
+
+<div class="box box-solid box-primary">
+    <div class="box-header with-border">
+        <h2 class="box-title">
+            Subjects
+        </h2>
+        <div class="box-tools">
+        </div>
+    </div>
+    <div class="box-body">
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                @if (Model != null)
+                {
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover custom-table-style" id="dtSubject">
+                            <thead>
+                                <tr>
+                                    <th> @Html.DisplayName("SR No") </th>
+                                    <th> @Html.DisplayNameFor(model => model.SubjectName) </th>
+                                    <th width="200px" style="text-align:center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 1;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span>@i</span>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.SubjectName)
+                                        </td>
+                                        <td style="text-align:center">
+                                            &nbsp;
+                                            <a href="#" data-toggle="tooltip" title="Edit" class="edit-Subject" data-placement="top" data-id="@item.Subject_ID">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </a>
+                                            @*<a href="@Url.Action("Edit", "Subject", new { id = item.Subject_ID })" data-toggle="tooltip" title="Edit" data-placement="top"><i class="glyphicon glyphicon-edit"></i> </a>*@
+                                            &nbsp;
+                                            <a href="@Url.Action("Details", "Subject", new { id = item.Subject_ID })" data-toggle="tooltip" title="Details" data-placement="top"><i class="glyphicon glyphicon-list"></i> </a>
+                                            &nbsp;
+                                            <a href="#" data-toggle="tooltip" title="Delete" data-placement="top" data-id="@item.Subject_ID"><i class="glyphicon glyphicon-trash"></i> </a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+
+    </div><!-- /.box-footer-->
+
+    <div class="overlay" style="display:none" id="loading">
+        <i class="fa fa-refresh fa-spin"></i>
+    </div>
+</div>
+
+<div class="modal fade" id="EditSubject">
+</div>
+
+<div class="modal fade" id="AddSubject">
+</div>
+
+
+<script>
+    $("#dtSubject tbody tr").on('click', function (event) {
+        $("#dtSubject tbody tr").removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+
+    var SubjectTable;
+
+    $(document).ready(function () {
+        generateDeleteButtonLinks();
+
+        $('#Add-Subject').click(function () {
+            var modal = $('#AddSubject').modal();
+            modal.load("@Url.Action("AddSubject")");
+        });
+
+        var handleDataTableButtons = function () {
+            drawDatatable();
+        };
+
+        TableManageButtons = function () {
+            "use strict";
+            return {
+                init: function () {
+                    handleDataTableButtons();
+                }
+            };
+        }();
+
+        TableManageButtons.init();
+    });
+
+    function drawDatatable() {
+        if ($("#dtSubject").length) {
+            SubjectTable = $("#dtSubject").DataTable({
+                dom: "Bfrtip",
+                columnDefs: [
+                    { "orderable": false, "targets": 2 }
+                ],
+                buttons: [
+                  {
+                      extend: "copy",
+                      className: "btn-sm",
+                      exportOptions: {
+                          columns: [0, 1]
+                      },
+                      title: "Subject"
+
+                  },
+                  {
+                      extend: "excel",
+                      className: "btn-sm",
+                      exportOptions: {
+                          columns: [0, 1]
+                      },
+                      title: "Subject"
+                  },
+                  {
+                      extend: "pdfHtml5",
+                      className: "btn-sm",
+                      exportOptions: {
+                          columns: [0, 1]
+                      },
+                      title: "Subject"
+                  },
+                  {
+                      extend: "print",
+                      className: "btn-sm",
+                      exportOptions: {
+                          columns: [0, 1]
+                      },
+                      title: "Subject"
+                  },
+                ],
+                responsive: true
+            });
+        }
+    }
+
+    function generateDeleteButtonLinks() {
+
+        $('.edit-Subject').click(function () {
+            var id = $(this).attr('data-id');
+            var modal = $('#EditSubject').modal();
+            modal.load('/Subject/EditSubject/' + id);
+        });
+
+        $('.delete-Subject').click(function (event) {
+
+            // Cancel user deletion if confirmation is negative
+            var result = confirm("Do you really want to delete ?");
+            if (!result)
+                return;
+            var url = "/Subject/Delete";
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: url + '/' + id,
+                type: 'POST',
+                cache: false,
+                dataType: "json",
+                success: function (response) {
+                    refreshSubjectTable();
+                },
+                error: function (xhr) { }
+            });
+            event.preventDefault();
+        });
+    }
+
+    function refreshSubjectTable() {
+        $("#loading").show();
+        $("#dtSubject tbody tr").remove();
+
+        $.ajax({
+            type: 'POST',
+            url: "/Subject/Refresh/",
+            dataType: 'json',
+            success: function (data) {
+                var items = '';
+                SubjectTable.clear();
+                SubjectTable.destroy();
+                var j = 1;
+                $.each(data, function (i, item) {
+                    alert(url);
+                    var rows = "<tr>"
+                        + "<td> <span>" + j + "</span> </td>"
+                        + "<td>" + item.SubjectName + "</td>"
+                        + "<td style='text-align:center'>"
+                        + " <a href='#' data-toggle='tooltip' title='Edit' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-edit'></i> </a>"
+                        + " <a href='#' data-toggle='tooltip' title='Details' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-list'></i> </a>"
+                        + " <a href='#' data-toggle='tooltip' title='Delete' data-placement='top' data-id='" + item.Subject_ID + "'><i class='glyphicon glyphicon-trash'></i> </a>"
+                        + "</td>"
+                        + "</tr>";
+                    $('#dtSubject tbody').append(rows);
+                    j++;
+                });
+                generateDeleteButtonLinks();
+                drawDatatable();
+            },
+            error: function (ex) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+            }
+        });
+
+        $("#loading").hide();
+    }
+
+    var ajaxSuccess = function (response) {
+        $('#AddSubject').modal('hide');
+        $('#EditSubject').modal('hide');
+        if (response.isSuccess) {
+        refreshDepartmentTable();
+            refreshSubjectTable();
+        }
+    }
+    var ajaxFailure = function (xhr, status) {
+        alert('Error: ' + xhr.statusText);
+    }
+
+</script>

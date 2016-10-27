@@ -64,6 +64,5 @@ E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Mod
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\EntityFramework.SqlServer.xml
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
-E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.csprojResolveAssemblyReference.cache
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.dll
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraftSchool_Model\obj\Debug\TechnoCraftSchool_Model.pdb

@@ -319,6 +319,9 @@ E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\ob
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.Migrations.UpdateStudentTable.resources
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.Migrations.StudentTableUpDate.resources
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.Migrations.UpdateStudentTable1.resources
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.Migrations._123.resources
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.csproj.GenerateResource.Cache
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.dll
 E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.pdb
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.Migrations.Subjects.resources
+E:\School Management\TechnoCraft_School\TechnoCraft_School\TechnoCraft_School\obj\Debug\TechnoCraft_School.Migrations.UserRoles.resources

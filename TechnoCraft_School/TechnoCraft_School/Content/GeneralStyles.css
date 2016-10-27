@@ -1,59 +1,62 @@
-﻿ #notification {
-  height: 50px;
-  padding: 10px;
-  border-bottom: #0a0;
-  box-shadow: 0px 0px 2px rgba(0,0,0,0.35);
-  text-align: center;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  font-size: 20px;
-  color: #fff;
-  text-shadow: 1px 1px 0px #999;
-  z-index:1000;
-  display: none;
+﻿#notification {
+    height: 50px;
+    padding: 10px;
+    border-bottom: #0a0;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.35);
+    text-align: center;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 0px #999;
+    z-index: 1000;
+    display: none;
 }
 
-#notification.error {
-  background-color: Red;
-}
-#notification.success {
-  background: rgba(75,200,75,0.90);
-}
- .alert-danger, .alert-error {
+    #notification.error {
+        background-color: Red;
+    }
+
+    #notification.success {
+        background: rgba(75,200,75,0.90);
+    }
+
+.alert-danger, .alert-error {
     border-color: #d73925;
     background-color: #dd4b39 !important;
-    color:white;
+    color: white;
 }
 
 .alert1 {
-    margin-top:2px;
+    margin-top: 2px;
     border-radius: 4px;
-    
 }
-.custom-table-style
-{
+
+.custom-table-style {
     border-radius: 3px;
-    border:1px solid lightgray;
-    width:100% !important;
+    border: 1px solid lightgray;
+    width: 100% !important;
 }
-.custom-table-style thead tr
-{
-    background-color:lightgray;
-    color:darkslategrey;
+
+    .custom-table-style thead tr {
+        background-color: lightgray;
+        color: darkslategrey;
+    }
+
+    .custom-table-style tbody tr td {
+        border: 1px solid lightgray;
+    }
+
+    .custom-table-style thead tr th {
+        border: 1px solid #b2aeae !important;
+        border-bottom: none;
+        border-top-left-radius: 3px;
+    }
+
+tr.row_selected td {
+    background-color: lightgoldenrodyellow !important;
 }
-.custom-table-style tbody tr td
-{
-    border:1px solid lightgray;
-    
-}
-.custom-table-style thead tr th
-{
-    border:1px solid #b2aeae !important;
-    border-bottom:none;
-    border-top-left-radius:3px;
-}
-tr.row_selected td{background-color:lightgoldenrodyellow    !important;}
 
 /* Modal Dialog Box*/
 @media (min-width: 768px) {
@@ -62,4 +65,3 @@ tr.row_selected td{background-color:lightgoldenrodyellow    !important;}
         max-width: 1200px;
     }
 }
-

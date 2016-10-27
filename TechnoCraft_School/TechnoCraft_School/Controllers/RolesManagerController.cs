@@ -6,119 +6,145 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
+using TechnoCraft_School.Utils.Notification;
 
 namespace TechnoCraft_School.Controllers
 {
     [Authorize(Roles = "Global Admin")]
-    public class RolesManagerController : Controller
+    public class RolesManagerController : ControllerBase
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-
         private ApplicationUserManager _userManager;
+
         public ApplicationUserManager UserManager
         {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            get { return _userManager; }
             private set { _userManager = value; }
         }
-
-
         // GET: RolesManager
-        [Authorize]
         public ActionResult Index()
         {
             var roles = db.Roles.ToList();
+
+            SelectList s1 = new SelectList(db.Users.ToList(), "Id", "UserName");
+            ViewBag.comboboxUsers = s1;
+
+            SelectList s2 = new SelectList(db.Roles.ToList(), "Id", "Name");
+            ViewBag.comboboxRoles = s2;
+
             return View(roles);
-        }
-        
-        [Authorize]
-        public ActionResult ManageUserRoles()
-        {
-            //db.Users.ToList();
-            IEnumerable<ApplicationUser> Users = db.Users.ToList().Where(u => u.Id != User.Identity.GetUserId());
-            SelectList s = new SelectList(Users, "Id", "UserName");
-            ViewBag.UserName = s;
-            
-            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
-            return View();
         }
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult GetRoles(string UserName, string RoleName)
+        public ActionResult Create(FormCollection collection)
         {
-            if (!string.IsNullOrWhiteSpace(UserName))
+            try
             {
-                ApplicationUser user = db.Users.Where(u => u.Id.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-                string str = Request.Params["buttonGroup"];
-                if (str.Equals("Add Role To User"))
+                var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+                    (new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                if (!roleManager.RoleExists(collection["RoleName"]))
                 {
-                    UserManager.AddToRole(user.Id, RoleName);
-                }
-
-                ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
-
-                List<ApplicationUser> Users = db.Users.ToList();
-                SelectList s = new SelectList(Users, "Id", "UserName");
-                ViewBag.UserName = s;
-
-
-                // prepopulat roles for the view dropdown
-                var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-                ViewBag.Roles = list;
-                ViewBag.User = UserName;
-            }
-            return View("ManageUserRoles");
-        }
-
-        [Authorize]
-        public ActionResult DeleteRoleForUser(string UserName, string RoleName)
-        {
-            ApplicationUser user = db.Users.Where(u => u.Id.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-
-            if (UserManager.IsInRole(user.Id, RoleName))
-            {
-                if (!RoleName.Equals("Admin"))
-                {
-                    UserManager.RemoveFromRole(user.Id, RoleName);
-                    ViewBag.SuccessMessage = "User role has been removed successfully";
+                    db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                    {
+                        Name = collection["RoleName"]
+                    });
+                    db.SaveChanges();
+                    this.ShowMessage(MessageType.Success, "Roles added successfully.", true);
                 }
                 else
                 {
-                    //UserManager.RemoveFromRole(user.Id, RoleName);
-                    ViewBag.WarningMessage = "Admin can't change his own role !";
+                    this.ShowMessage(MessageType.Error, "Roles already exists.", true);
                 }
+                return RedirectToAction("Index");
             }
-            else
+            catch
             {
-                ViewBag.WarningMessage = "This user not belongs to selected role.";
+                this.ShowMessage(MessageType.Error, "Error occurred while adding Role.", true);
+                return RedirectToAction("Index");
             }
-
-
-
-            List<ApplicationUser> Users = db.Users.ToList();
-            SelectList s = new SelectList(Users, "Id", "UserName");
-            ViewBag.UserName = s;
-
-            // prepopulat roles for the view dropdown
-            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
-
-            ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
-            ViewBag.User = UserName;
-            return View("ManageUserRoles");
         }
 
         [Authorize]
-        public ActionResult UserInfo()
+        [AjaxMessagesFilter]
+        public ActionResult Delete(string RoleName)
         {
+            try
+            {
+                var thisRole = db.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                db.Roles.Remove(thisRole);
+                db.SaveChanges();
+                this.ShowMessage(MessageType.Success, "Role is deleted.", true);
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageType.Error, "Error occurred while deleting Role.", true);
+                return RedirectToAction("Index");
+            }
+        }
 
-            List<ApplicationUser> Users = db.Users.ToList();
-            SelectList s = new SelectList(Users, "Id", "UserName");
-            ViewBag.UserName = s;
+        [Authorize]
+        public ActionResult GetUserRoles(string userName)
+        {
+            try
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var rolesForUser = userManager.GetRoles(userName);
+                return Json(rolesForUser, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
-            return View();
+        [Authorize]
+        [AjaxMessagesFilter]
+        public ActionResult DeleteUserRoles(string userName, string rolename)
+        {
+            try
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                if (userManager.IsInRole(userName, rolename))
+                {
+                    userManager.RemoveFromRole(userName, rolename);
+                }
+                this.ShowMessage(MessageType.Success, "The Role has been deleted.");
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageType.Error, "Error while deleting role.");
+                return Json(false);
+            }
+        }
+
+        [Authorize]
+        [AjaxMessagesFilter]
+        public ActionResult AddUserRoles(string userName, string rolename)
+        {
+            try
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                if (!userManager.IsInRole(userName, rolename))
+                {
+                    userManager.AddToRole(userName, rolename);
+                    this.ShowMessage(MessageType.Success, "The Role has been added.");
+                    return Json(true);
+                }
+                else
+                {
+                    this.ShowMessage(MessageType.Error, "This user already contains this role.");
+                    return Json(false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageType.Error, AddModelErrors(ex.Message));
+                return Json(false);
+            }
         }
 
     }

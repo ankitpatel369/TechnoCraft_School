@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace TechnoCraftSchool_Model.Subjects
+namespace TechnoCraftSchool_Model
 {
     [Table("Subjects")]
-    public class Subjects
+    public class Subject
     {
         [Key]
         public int Subject_ID { get; set; }
@@ -19,8 +19,8 @@ namespace TechnoCraftSchool_Model.Subjects
         
     }
 
-    [Table("Subjectassign")]
-    public class Subjectassign
+    [Table("SubjectAssign")]
+    public class SubjectAssign
     {
         [Key]
         public int Subjectassign_ID { get; set; }
@@ -36,6 +36,8 @@ namespace TechnoCraftSchool_Model.Subjects
         [Required]
         [Display(Name = "Subject")]
         public int Subject_ID { get; set; }
+
+        public virtual Subject Subjects { get; set; }
     }
 
     [Table("SubjectAllocation")]
@@ -71,5 +73,8 @@ namespace TechnoCraftSchool_Model.Subjects
         [Display(Name = "Allocation Date")]
         [DataType(DataType.DateTime)]
         public DateTime? AllocationDate { get; set; }
+
+        public virtual SubjectAssign SubjectAssigns { get; set; }
+
     }
 }

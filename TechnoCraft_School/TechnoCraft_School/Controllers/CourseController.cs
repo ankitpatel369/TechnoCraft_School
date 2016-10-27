@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using TechnoCraft_School.Utils;
+using TechnoCraft_School.Utils.Notification;
 using TechnoCraftSchool_Model;
+
 
 namespace TechnoCraft_School.Controllers
 {
@@ -43,7 +44,7 @@ namespace TechnoCraft_School.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Course_ID,CourseName,CourseAlias,Description,CourseCode,IsActive")] Course course)
+        public ActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +76,7 @@ namespace TechnoCraft_School.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Course_ID,CourseName,CourseAlias,Description,CourseCode,IsActive")] Course course)
+        public ActionResult Edit(Course course)
         {
             if (ModelState.IsValid)
             {
@@ -106,9 +107,9 @@ namespace TechnoCraft_School.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
+            db.Courses.Remove(db.Courses.Find(id));
             db.SaveChanges();
+            this.ShowMessage(MessageType.Success, "Course Remove Succefully.", true);
             return RedirectToAction("Index");
         }
 
