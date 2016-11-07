@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AcademicYear\AcademicYear.cs" />
     <Compile Include="Admissions\Admissions.cs" />
+    <Compile Include="Admissions\AdmissionViewModel.cs" />
     <Compile Include="Admissions\Admission_Additional_Info.cs" />
     <Compile Include="Class\Class.cs" />
     <Compile Include="Contacts\Contacts.cs" />
