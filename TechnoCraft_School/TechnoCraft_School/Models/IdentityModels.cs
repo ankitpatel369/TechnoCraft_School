@@ -52,6 +52,8 @@ namespace TechnoCraft_School.Models
         /*Admission Models*/
         public DbSet<Admissions> Admissions { get; set; }
         public DbSet<Admission_Additional_Info> Admission_Additional_Infos { get; set; }
+        public DbSet<Guardian_Details> Guardian_Details { get; set; }
+        public DbSet<Last_Attended_Details> Last_Attended_Details { get; set; }
 
         /* Subject models*/
         public DbSet<Subject> Subjects { get; set; }
@@ -89,6 +91,8 @@ namespace TechnoCraft_School.Models
 
             modelBuilder.Entity<Admissions>().ToTable("Admissions", "dbo");
             modelBuilder.Entity<Admission_Additional_Info>().ToTable("Admission_Additional_Info", "dbo");
+            modelBuilder.Entity<Guardian_Details>().ToTable("Guardian_Details", "dbo");
+            modelBuilder.Entity<Last_Attended_Details>().ToTable("Last_Attended_Details", "dbo");
 
 
             //Course -> Standard one to many relation
@@ -100,6 +104,10 @@ namespace TechnoCraft_School.Models
             //Classes -> Batch one to many relation
             modelBuilder.Entity<Class>().HasMany(c => c.Divisions).WithRequired(c => c.Classs);//.WillCascadeOnDelete();
 
+            //Admission -> (Admission_Additional_Info,Guardian_Details,Last_Attended_Details one to one relation
+            modelBuilder.Entity<Admissions>().HasOptional(aai => aai.Admission_Additional_Infos).WithRequired(a => a.Admission);
+            modelBuilder.Entity<Admissions>().HasOptional(gd => gd.Guardian_Details).WithRequired(a => a.Admissions);
+            modelBuilder.Entity<Admissions>().HasOptional(lad => lad.Last_Attended_Details).WithRequired(a => a.Admissionsl);
         }
 
     }

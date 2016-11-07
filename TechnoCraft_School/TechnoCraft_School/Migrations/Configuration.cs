@@ -15,45 +15,45 @@ namespace TechnoCraft_School.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(TechnoCraft_School.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            try
-            {
-                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                {
-                    Name = "Global Admin"
-                });
+            //try
+            //{
+            //    context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            //    {
+            //        Name = "Global Admin"
+            //    });
 
-                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                {
-                    Name = "Admin"
-                });
+            //    context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            //    {
+            //        Name = "Admin"
+            //    });
                 
-                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                {
-                    Name = "Faculty"
-                });
+            //    context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            //    {
+            //        Name = "Faculty"
+            //    });
 
-                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
-                {
-                    Name = "Student"
-                });
-                context.SaveChanges();
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation(
-                              "Class: {0}, Property: {1}, Error: {2}",
-                              validationErrors.Entry.Entity.GetType().FullName,
-                              validationError.PropertyName,
-                              validationError.ErrorMessage);
-                    }
-                }
-            }
+            //    context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            //    {
+            //        Name = "Student"
+            //    });
+            //    context.SaveChanges();
+            //}
+            //catch (DbEntityValidationException dbEx)
+            //{
+            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in validationErrors.ValidationErrors)
+            //        {
+            //            Trace.TraceInformation(
+            //                  "Class: {0}, Property: {1}, Error: {2}",
+            //                  validationErrors.Entry.Entity.GetType().FullName,
+            //                  validationError.PropertyName,
+            //                  validationError.ErrorMessage);
+            //        }
+            //    }
+            //}
         }
     }
 }

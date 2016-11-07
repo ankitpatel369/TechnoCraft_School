@@ -5,7 +5,6 @@
 
 @section Header{
     <h1>
-
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -13,18 +12,17 @@
         <li class="active">Roles Management</li>
     </ol>
 }
+
 <div class="row">
+
     <div class="col-md-6">
-
         <div class="box box-solid box-primary ">
-
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-sitemap"></i>&nbsp;Roles</h3>
                 <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
-
             <div class="box-body">
                 <table class="table table-responsive custom-table-style">
                     <thead>
@@ -47,9 +45,7 @@
                         }
                     </tbody>
                 </table>
-
             </div><!-- /.box-body -->
-
             <div class="box-footer">
                 <form action="#" method="post">
                     <div class="input-group">
@@ -57,53 +53,30 @@
                     </div>
                 </form>
             </div><!-- /.box-footer-->
-
         </div><!-- /.box -->
-
     </div>
 
     <div class="col-md-6">
-
         <div class="box box-solid box-primary">
-
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-user  "></i>&nbsp;Manage User Roles</h3>
                 <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
-
             <div class="box-body">
-
-
                 <div class="form-group">
                     <label style="display:block">Select User</label>
                     @Html.DropDownList("comboboxUsers", null, new { @class = "select2 form-control", @style = "width:100%" })
                 </div>
-
-
-
-
-
-
-
                 <!-- /.form-group -->
                 <div id="tableSection"></div>
-
-
-
-
-
-
             </div><!-- /.box-body -->
-
             <div class="box-footer">
                 <input type="button" class="btn btn-primary" value="View Roles of User" onclick="GetRole()" />
                 <input type="button" data-toggle="modal" data-target="#addRoleToUser" class="btn btn-primary" value="Add Roles To User" />
             </div><!-- /.box-footer-->
-
         </div><!-- /.box -->
-
     </div>
 
 </div>
@@ -150,7 +123,6 @@
             <div class="modal-body">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Role</label>
                     <div class="col-sm-12">
@@ -176,17 +148,17 @@
         if (!result)
             return;
         $.ajax({
-                  url: "/RolesManager/Delete/",
-                  data: { RoleName: $(this).attr('data-id') },
-                  type: 'POST',
-                  cache: false,
-                  dataType: "json",
-                  success: function (response) {
-                      location.reload();
-                  },
-                  error: function (xhr) {
-                  }
-              });
+            url: "/RolesManager/Delete/",
+            data: { RoleName: $(this).attr('data-id') },
+            type: 'POST',
+            cache: false,
+            dataType: "json",
+            success: function (response) {
+                location.reload();
+            },
+            error: function (xhr) {
+            }
+        });
         event.preventDefault();
     });
 
